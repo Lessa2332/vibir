@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>U-GOV | Чорноморський ліцей №6</title>
+    <title>Парламент Ліцею №6 | Вибір Міністерства</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
@@ -17,7 +17,6 @@
             --text-main: #f8fafc;
             --text-dim: #94a3b8;
             --grad: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            --safe-area: env(safe-area-inset-bottom);
         }
 
         * {
@@ -35,10 +34,8 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            line-height: 1.5;
         }
 
-        /* Animated Background Gear */
         body::before {
             content: '';
             position: fixed;
@@ -55,121 +52,110 @@
         .app-container {
             width: 100%;
             max-width: 480px;
-            padding: 24px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
         }
 
-        /* Header UI */
+        /* Оновлений Хедер */
         .u-header {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 24px;
             padding-top: 20px;
         }
 
-        .u-logo-wrapper {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 16px;
-        }
-
         .u-logo {
-            width: 80px;
-            height: 80px;
-            border-radius: 22px;
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
             background: white;
-            padding: 10px;
+            padding: 8px;
             box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+            margin-bottom: 12px;
         }
 
         .u-header h1 {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 800;
-            letter-spacing: -0.5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             background: var(--grad);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Glass Cards */
+        .u-header p {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        /* Картки */
         .u-card {
             background: var(--card-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border);
-            border-radius: 32px;
-            padding: 32px;
+            border-radius: 28px;
+            padding: 24px;
             display: none;
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            animation: cardAppear 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+            animation: cardAppear 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         @keyframes cardAppear {
-            from { opacity: 0; transform: translateY(30px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .u-card.active { display: block; }
 
-        /* Video Section Modernized */
+        /* Відео */
         .u-video-box {
             position: relative;
-            border-radius: 28px;
+            border-radius: 22px;
             overflow: hidden;
             background: #000;
             aspect-ratio: 9/16;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             border: 1px solid var(--border);
         }
 
-        #introVideo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        #introVideo { width: 100%; height: 100%; object-fit: cover; }
 
         .u-video-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.9));
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 30px;
+            padding: 24px;
             text-align: center;
         }
 
         .btn-play {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            background: var(--text-main);
+            background: white;
             border: none;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
-        .btn-play:hover { transform: scale(1.1); }
+        .btn-play svg { width: 28px; height: 28px; fill: var(--bg); margin-left: 4px; }
 
-        .btn-play svg {
-            width: 32px;
-            height: 32px;
-            fill: var(--bg);
-            margin-left: 4px;
-        }
-
-        /* Survey UI */
+        /* Опитування */
         .u-progress-track {
-            height: 6px;
+            height: 4px;
             background: rgba(255,255,255,0.05);
             border-radius: 10px;
-            margin-bottom: 32px;
+            margin-bottom: 24px;
             overflow: hidden;
         }
 
@@ -178,156 +164,115 @@
             background: var(--grad);
             width: 0%;
             transition: width 0.4s ease;
-            box-shadow: 0 0 15px var(--accent-glow);
         }
 
         .u-question {
-            font-size: 20px;
+            font-size: 19px;
             font-weight: 600;
             margin-bottom: 24px;
-            color: var(--text-main);
+            line-height: 1.4;
         }
 
-        .u-options {
-            display: grid;
-            gap: 12px;
-        }
+        .u-options { display: grid; gap: 10px; }
 
         .u-option-btn {
             background: rgba(255,255,255,0.03);
             border: 1px solid var(--border);
-            padding: 18px 24px;
-            border-radius: 20px;
+            padding: 16px 20px;
+            border-radius: 18px;
             color: var(--text-main);
             text-align: left;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 15px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 16px;
-            transition: all 0.25s ease;
+            gap: 14px;
+            transition: 0.2s;
         }
 
         .u-option-btn:hover {
             background: rgba(99, 102, 241, 0.1);
             border-color: var(--accent);
-            transform: scale(1.02);
         }
 
-        .u-option-btn svg {
-            width: 24px;
-            height: 24px;
-            stroke: var(--accent);
-            flex-shrink: 0;
-        }
+        .u-option-btn svg { width: 22px; height: 22px; stroke: var(--accent); flex-shrink: 0; }
 
-        /* Result Visuals */
-        .u-result-id {
-            text-align: center;
-        }
-
+        /* Результат */
         .u-ministry-icon-box {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             background: var(--grad);
-            border-radius: 30px;
-            margin: 0 auto 20px;
+            border-radius: 24px;
+            margin: 0 auto 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
         }
 
-        .u-ministry-icon-box svg {
-            width: 50px;
-            height: 50px;
-            stroke: white;
-            stroke-width: 1.5;
-        }
+        .u-ministry-icon-box svg { width: 40px; height: 40px; stroke: white; }
 
         .u-badge {
             display: inline-block;
-            padding: 6px 16px;
-            background: rgba(99, 102, 241, 0.15);
+            padding: 4px 12px;
+            background: rgba(99, 102, 241, 0.1);
             border: 1px solid var(--accent);
             border-radius: 100px;
             color: var(--accent);
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
             margin-bottom: 12px;
         }
 
-        .u-task-grid {
-            text-align: left;
-            margin-top: 24px;
-            display: grid;
-            gap: 10px;
-        }
-
         .u-task-item {
-            background: rgba(255,255,255,0.03);
-            padding: 14px 18px;
-            border-radius: 16px;
+            background: rgba(255,255,255,0.02);
+            padding: 12px 16px;
+            border-radius: 14px;
             font-size: 14px;
             color: var(--text-dim);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            margin-bottom: 8px;
+            text-align: left;
         }
 
-        .u-task-item svg {
-            width: 18px;
-            height: 18px;
-            stroke: var(--accent);
-            flex-shrink: 0;
-        }
+        .u-task-item svg { width: 16px; height: 16px; stroke: var(--accent); flex-shrink: 0; }
 
-        /* Main Button */
         .u-btn-primary {
             background: var(--grad);
             color: white;
             border: none;
-            padding: 20px;
-            border-radius: 20px;
+            padding: 18px;
+            border-radius: 18px;
             font-size: 16px;
-            font-weight: 800;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
-            margin-top: 24px;
-            transition: 0.3s;
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+            margin-top: 20px;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
         }
-
-        .u-btn-primary:active { transform: scale(0.98); }
 
         .u-skip {
             background: transparent;
             border: none;
             color: var(--text-dim);
-            font-weight: 600;
             font-size: 14px;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 12px;
         }
-
-        /* Hide Scrollbar */
-        ::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body>
 
 <div class="app-container">
     <header class="u-header">
-        <div class="u-logo-wrapper">
-            <img src="https://i0.wp.com/ilschool6.com/wp-content/uploads/2017/05/school.png" class="u-logo" alt="Ліцей 6">
-        </div>
-        <h1>U-GOV : 2026</h1>
+        <img src="https://i0.wp.com/ilschool6.com/wp-content/uploads/2017/05/school.png" class="u-logo" alt="Логотип">
+        <h1>Парламент Ліцею №6</h1>
+        <p>Твій шлях до Кабінету Міністрів</p>
     </header>
 
-    <!-- INTRO VIDEO CARD -->
+    <!-- ВІДЕО ВСТУП -->
     <div id="card-video" class="u-card active" style="padding: 10px;">
         <div class="u-video-box">
             <video id="introVideo" playsinline>
@@ -337,144 +282,139 @@
                 <button class="btn-play" onclick="playIntro()">
                     <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 </button>
-                <h2 style="font-size: 24px; margin-bottom: 10px;">Твій голос має силу</h2>
-                <p style="color: var(--text-dim); font-size: 15px;">Дізнайся, як ти можеш прокачати свій ліцей</p>
+                <h2 style="font-size: 22px; margin-bottom: 8px;">Стань частиною змін</h2>
+                <p style="color: var(--text-dim); font-size: 14px;">Поглянь, як працює Парламент нашого ліцею</p>
                 <button class="u-skip" onclick="toStart()">Пропустити відео</button>
             </div>
         </div>
     </div>
 
-    <!-- START CARD -->
-    <div id="card-start" class="u-card">
-        <div class="u-badge">Mission Start</div>
-        <h2 style="font-size: 28px; margin-bottom: 16px;">Готовий до змін?</h2>
-        <p style="color: var(--text-dim); margin-bottom: 32px;">Ми підготували 15 ситуаційних кейсів. Твої рішення визначать твою роль у Кабінеті Міністрів ліцею.</p>
-        <button class="u-btn-primary" onclick="startSurvey()">РОЗПОЧАТИ СИНХРОНІЗАЦІЮ</button>
+    <!-- СТАРТ -->
+    <div id="card-start" class="u-card" style="text-align: center;">
+        <div class="u-badge">Ідентифікація лідера</div>
+        <h2 style="font-size: 24px; margin-bottom: 12px;">Знайди своє місце</h2>
+        <p style="color: var(--text-dim); margin-bottom: 24px; font-size: 15px;">Пройди 15 ситуаційних тестів, щоб система визначила, у якому Міністерстві ти принесеш найбільше користі ліцею.</p>
+        <button class="u-btn-primary" onclick="startSurvey()">ПОЧАТИ ТЕСТУВАННЯ</button>
     </div>
 
-    <!-- SURVEY CARD -->
+    <!-- ТЕСТ -->
     <div id="card-survey" class="u-card">
         <div class="u-progress-track">
             <div id="u-bar" class="u-progress-fill"></div>
         </div>
-        <p id="u-counter" style="color: var(--accent); font-size: 12px; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">Question 01</p>
+        <p id="u-counter" style="color: var(--accent); font-size: 11px; font-weight: 800; text-transform: uppercase; margin-bottom: 6px;">Питання 01</p>
         <div id="u-question" class="u-question"></div>
         <div id="u-options" class="u-options"></div>
     </div>
 
-    <!-- RESULT CARD -->
-    <div id="card-result" class="u-card u-result-id">
-        <div class="u-badge">Analysis Complete</div>
-        <div class="u-ministry-icon-box" id="res-icon-box">
-            <!-- SVG will be injected here -->
-        </div>
-        <h2 id="res-name" style="font-size: 24px; margin-bottom: 12px;"></h2>
-        <p id="res-desc" style="color: var(--text-dim); font-size: 14px; margin-bottom: 24px; padding: 0 10px;"></p>
+    <!-- РЕЗУЛЬТАТ -->
+    <div id="card-result" class="u-card" style="text-align: center;">
+        <div class="u-badge">Аналіз завершено</div>
+        <div class="u-ministry-icon-box" id="res-icon-box"></div>
+        <h2 id="res-name" style="font-size: 22px; margin-bottom: 8px;"></h2>
+        <p id="res-desc" style="color: var(--text-dim); font-size: 14px; margin-bottom: 20px;"></p>
         
-        <div class="u-task-grid" id="res-tasks">
-            <!-- Tasks will be injected here -->
-        </div>
+        <div id="res-tasks"></div>
 
-        <button class="u-btn-primary" onclick="location.reload()">ПЕРЕЗАВАНТАЖИТИ</button>
+        <button class="u-btn-primary" onclick="location.reload()">ПРОЙТИ ЩЕ РАЗ</button>
+        <p style="margin-top: 16px; font-size: 12px; color: var(--text-dim);">Звернися до Президента Парламенту для реєстрації!</p>
     </div>
 </div>
 
 <script>
-    // --- VECTOR ICONS (SVG PATHS) ---
     const ICONS = {
         edu: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`,
         disc: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
         cult: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>`,
         sport: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
         info: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>`,
-        check: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>`,
         arrow: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`
     };
 
     const surveyData = {
         questions: [
-            { q: "У коридорі гамір, і хтось розсипав важливі папери. Твоя миттєва реакція?", options: [
-                { t: "Допомагаю зібрати та розкласти все по папках", s: { disc: 3 }, i: ICONS.disc },
-                { t: "Зроблю фото та викладу в чат, щоб знайшли власника", s: { info: 3 }, i: ICONS.info },
-                { t: "Питаю, чи це не тези для наукової конференції", s: { edu: 3 }, i: ICONS.edu }
+            { q: "У коридорі гамір, і хтось розсипав папери. Твоя реакція?", options: [
+                { t: "Допомагаю зібрати та розкласти все по порядку", s: { disc: 3 }, i: ICONS.disc },
+                { t: "Зроблю фото та викладу в чат, щоб знайти власника", s: { info: 3 }, i: ICONS.info },
+                { t: "Питаю, чи це не тези для конференції", s: { edu: 3 }, i: ICONS.edu }
             ]},
             { q: "Клас має 15 хвилин, щоб підготувати виступ. Що візьмеш на себе?", options: [
-                { t: "Придумаю креативний сценарій чи візуальні ефекти", s: { cult: 3 }, i: ICONS.cult },
-                { t: "Складу чіткий план і розподілю ролі", s: { disc: 3 }, i: ICONS.disc },
-                { t: "Зафіксую все на відео для шкільного архіву", s: { info: 3 }, i: ICONS.info }
+                { t: "Придумаю креативний сценарій", s: { cult: 3 }, i: ICONS.cult },
+                { t: "Розподілю ролі та буду стежити за часом", s: { disc: 3 }, i: ICONS.disc },
+                { t: "Змонтую фонове відео чи підберу музику", s: { info: 3 }, i: ICONS.info }
             ]},
-            { q: "У шкільному чаті суперечка про правила. Як дієш?", options: [
-                { t: "Наводжу аргументи з офіційного статуту ліцею", s: { disc: 3 }, i: ICONS.disc },
-                { t: "Створюю опитування, щоб почути кожного", s: { info: 3 }, i: ICONS.info },
-                { t: "Пропоную мирний спосіб вирішення конфлікту через арт-проєкт", s: { cult: 3 }, i: ICONS.cult }
+            { q: "У шкільному чаті конфлікт щодо правил. Як дієш?", options: [
+                { t: "Наводжу аргументи зі статуту ліцею", s: { disc: 3 }, i: ICONS.disc },
+                { t: "Створюю опитування, щоб знайти компроміс", s: { info: 3 }, i: ICONS.info },
+                { t: "Пропоную мирний творчий флешмоб", s: { cult: 3 }, i: ICONS.cult }
             ]},
-            { q: "Друг не розуміє складну тему перед тестом. Твоя допомога?", options: [
-                { t: "Пояснюю на пальцях, поки не стане зрозуміло", s: { edu: 3 }, i: ICONS.edu },
-                { t: "Скидаю посилання на круту статтю чи відеоурок", s: { info: 3 }, i: ICONS.info },
-                { t: "Організовую спільний коворкінг після уроків", s: { edu: 2, disc: 1 }, i: ICONS.edu }
+            { q: "Друг не розуміє тему перед тестом. Твоя допомога?", options: [
+                { t: "Пояснюю матеріал, поки він не зрозуміє", s: { edu: 3 }, i: ICONS.edu },
+                { t: "Скидаю корисний відеоурок або статтю", s: { info: 3 }, i: ICONS.info },
+                { t: "Організовую спільне навчання після уроків", s: { edu: 3 }, i: ICONS.edu }
             ]},
-            { q: "На перерві залишився вільний час. Чим займешся?", options: [
-                { t: "Запропоную швидкий челендж чи розминку", s: { sport: 3 }, i: ICONS.sport },
-                { t: "Буду монтувати влог про життя в ліцеї", s: { info: 3 }, i: ICONS.info },
-                { t: "Прогляну цікавий TED-talk або новини науки", s: { edu: 3 }, i: ICONS.edu }
+            { q: "На перерві є вільний час. Чим займешся?", options: [
+                { t: "Запропоную швидкий спортивний челендж", s: { sport: 3 }, i: ICONS.sport },
+                { t: "Буду робити контент про життя ліцею", s: { info: 3 }, i: ICONS.info },
+                { t: "Прогляну новини науки чи літератури", s: { edu: 3 }, i: ICONS.edu }
             ]},
-            { q: "У ліцеї відбулася крута подія, але про неї мало знають. Що зробиш?", options: [
-                { t: "Змонтую динамічний Reels і викладу в мережу", s: { info: 3 }, i: ICONS.info },
-                { t: "Запропоную зробити це традицією в календарі ліцею", s: { disc: 3 }, i: ICONS.disc },
-                { t: "Зроблю яскраві афіші в графічному редакторі", s: { cult: 3 }, i: ICONS.cult }
+            { q: "У ліцеї відбулася подія, але про неї мало знають. Що зробиш?", options: [
+                { t: "Змонтую динамічний Reels для соцмереж", s: { info: 3 }, i: ICONS.info },
+                { t: "Запропоную внести цю подію в офіційний календар", s: { disc: 3 }, i: ICONS.disc },
+                { t: "Зроблю яскраву афішу в графічному редакторі", s: { cult: 3 }, i: ICONS.cult }
             ]},
-            { q: "Зал до свята не прикрашений, а гості будуть за годину. Твої дії?", options: [
-                { t: "Швидко зберу команду і поставлю завдання кожному", s: { disc: 3 }, i: ICONS.disc },
-                { t: "Згенерую креативну ідею з підручних матеріалів", s: { cult: 3 }, i: ICONS.cult },
-                { t: "Зроблю прямий ефір підготовки, щоб залучити волонтерів", s: { info: 3 }, i: ICONS.info }
+            { q: "Зал до свята не прикрашений, а гості будуть скоро. Твої дії?", options: [
+                { t: "Швидко зберу команду і поставлю завдання", s: { disc: 3 }, i: ICONS.disc },
+                { t: "Згенерую ідею декору з того, що є під рукою", s: { cult: 3 }, i: ICONS.cult },
+                { t: "Зроблю прямий ефір, щоб закликати волонтерів", s: { info: 3 }, i: ICONS.info }
             ]},
-            { q: "Ніхто не знає, де наступний урок через заміну. Де ти?", options: [
-                { t: "Вже дізнаюся номер кабінету в адміністрації", s: { info: 3 }, i: ICONS.info },
-                { t: "Перевіряю офіційний портал розкладу", s: { disc: 3 }, i: ICONS.disc },
-                { t: "Використовую час, щоб повторити матеріал", s: { edu: 3 }, i: ICONS.edu }
+            { q: "Заміна уроку, але ніхто не знає кабінет. Де ти?", options: [
+                { t: "Вже дізнаюся номер у адміністрації", s: { info: 3 }, i: ICONS.info },
+                { t: "Перевіряю офіційний стенд розкладу", s: { disc: 3 }, i: ICONS.disc },
+                { t: "Використовую час для самоосвіти", s: { edu: 3 }, i: ICONS.edu }
             ]},
-            { q: "У їдальні черга перетворилася на хаос. Що зробиш?", options: [
-                { t: "Встановлю чітку чергу та правила для всіх", s: { disc: 3 }, i: ICONS.disc },
-                { t: "Запропоную систему електронного замовлення", s: { edu: 2, info: 1 }, i: ICONS.edu },
-                { t: "Відволіку всіх цікавою історією чи жартом", s: { cult: 3 }, i: ICONS.cult }
+            { q: "У їдальні безлад у черзі. Що зробиш?", options: [
+                { t: "Встановлю чіткий порядок та черговість", s: { disc: 3 }, i: ICONS.disc },
+                { t: "Запропоную цифрову систему замовлень", s: { edu: 3 }, i: ICONS.edu },
+                { t: "Відволіку всіх цікавим інтерактивом", s: { cult: 3 }, i: ICONS.cult }
             ]},
-            { q: "Учителя немає, клас нудьгує. Твоя ініціатива?", options: [
-                { t: "Проведу міні-квіз на знання мемів чи фактів", s: { edu: 3 }, i: ICONS.edu },
-                { t: "Стежитиму, щоб ніхто не порушував тишу", s: { disc: 3 }, i: ICONS.disc },
-                { t: "Запропоную зняти спільний TikTok-тренд", s: { cult: 3 }, i: ICONS.cult }
+            { q: "Вчитель запізнюється, клас шумить. Твоя ініціатива?", options: [
+                { t: "Проведу міні-вікторину для розваги", s: { edu: 3 }, i: ICONS.edu },
+                { t: "Закличу всіх до тиші та порядку", s: { disc: 3 }, i: ICONS.disc },
+                { t: "Запропоную зняти спільний TikTok", s: { cult: 3 }, i: ICONS.cult }
             ]},
-            { q: "Збираємо команду на міжшкільний турнір. Що твоє?", options: [
-                { t: "Буду в центрі подій, викладатимусь на повну", s: { sport: 3 }, i: ICONS.sport },
-                { t: "Створю крутий брендінг та назву для команди", s: { info: 3 }, i: ICONS.info },
-                { t: "Проаналізую тактику суперників", s: { edu: 3 }, i: ICONS.edu }
+            { q: "Збираємо команду на змагання. Яка твоя роль?", options: [
+                { t: "Буду безпосередньо виступати за ліцей", s: { sport: 3 }, i: ICONS.sport },
+                { t: "Зроблю промо-кампанію для підтримки команди", s: { info: 3 }, i: ICONS.info },
+                { t: "Проаналізую сильні та слабкі сторони суперників", s: { edu: 3 }, i: ICONS.edu }
             ]},
-            { q: "Новенький у класі почувається невпевнено. Як допоможеш?", options: [
-                { t: "Проведу екскурсію та розповім про лайфхаки", s: { info: 3 }, i: ICONS.info },
-                { t: "Запрошу до нашої компанії на обід", s: { cult: 3 }, i: ICONS.cult },
-                { t: "Поясню систему чергування та правила ліцею", s: { disc: 3 }, i: ICONS.disc }
+            { q: "Новенький у ліцеї соромиться. Як допоможеш?", options: [
+                { t: "Розповім про всі можливості нашого самоврядування", s: { info: 3 }, i: ICONS.info },
+                { t: "Запрошу в компанію на творчий гурток", s: { cult: 3 }, i: ICONS.cult },
+                { t: "Поясню правила та традиції ліцею", s: { disc: 3 }, i: ICONS.disc }
             ]},
-            { q: "Дрес-код на сьогодні — Cyberpunk. Твій лук?", options: [
-                { t: "Найскладніший костюм з неоном та гаджетами", s: { cult: 3 }, i: ICONS.cult },
-                { t: "Зроблю фоторепортаж про кращі образи дня", s: { info: 3 }, i: ICONS.info },
-                { t: "Стежитиму, щоб костюми не заважали безпеці", s: { disc: 3 }, i: ICONS.disc }
+            { q: "Тематика дня — «Футуризм». Твій образ?", options: [
+                { t: "Найскладніший технологічний костюм", s: { cult: 3 }, i: ICONS.cult },
+                { t: "Зроблю репортаж про кращі образи ліцею", s: { info: 3 }, i: ICONS.info },
+                { t: "Стежитиму, щоб образи не заважали безпеці", s: { disc: 3 }, i: ICONS.disc }
             ]},
-            { q: "Потрібна ранкова зарядка для ліцею. Як організуєш?", options: [
-                { t: "Показуватиму вправи під динамічний біт", s: { sport: 3 }, i: ICONS.sport },
-                { t: "Зроблю відео-інструкцію з правильним диханням", s: { info: 3 }, i: ICONS.info },
-                { t: "Складу плейлист, що ідеально підходить за ритмом", s: { cult: 3 }, i: ICONS.cult }
+            { q: "Потрібна активна руханка для ліцею. Що зробиш?", options: [
+                { t: "Показуватиму вправи на сцені", s: { sport: 3 }, i: ICONS.sport },
+                { t: "Змонтую відео-інструкцію для трансляції", s: { info: 3 }, i: ICONS.info },
+                { t: "Складу ідеальний плейлист для ритму", s: { cult: 3 }, i: ICONS.cult }
             ]},
-            { q: "Благодійний збір для тварин. Як залучиш кошти?", options: [
-                { t: "Організую стрім чи онлайн-марафон", s: { info: 3 }, i: ICONS.info },
-                { t: "Спланую лотерею чи благодійний аукціон", s: { disc: 2, edu: 1 }, i: ICONS.edu },
-                { t: "Придумаю творчий мерч для донаторів", s: { cult: 3 }, i: ICONS.cult }
+            { q: "Благодійний збір для тварин. Твій метод?", options: [
+                { t: "Запущу онлайн-марафон зі збором донатів", s: { info: 3 }, i: ICONS.info },
+                { t: "Складу план проведення благодійного аукціону", s: { edu: 3 }, i: ICONS.edu },
+                { t: "Придумаю творчий мерч для заохочення", s: { cult: 3 }, i: ICONS.cult }
             ]}
         ],
         ministries: {
-            edu: { name: "Education Hub", icon: ICONS.edu, desc: "Ти — архітектор знань. Твій аналітичний склад розуму та жага до навчання зроблять ліцей центром інтелектуальних перемог.", tasks: ["Організація IT-хакатонів та квізів", "Проєкти взаємодопомоги у навчанні", "Робота з науковими гуртками"] },
-            disc: { name: "Order Protocol", icon: ICONS.disc, desc: "Ти — гарант стабільності. Твоя здатність структурувати хаос та підтримувати правила робить ліцей безпечним місцем.", tasks: ["Координація шкільного самоврядування", "Контроль етики та безпеки", "Управління ресурсами ліцею"] },
-            cult: { name: "Creative Studio", icon: ICONS.cult, desc: "Ти — генератор ідей. Твоя креативність перетворює звичайне шкільне життя на нескінченний фестиваль талантів.", tasks: ["Організація масштабних івентів", "Дизайн та арт-проєкти", "Розвиток творчих ком'юніті"] },
-            sport: { name: "Active Force", icon: ICONS.sport, desc: "Ти — джерело енергії. Твій драйв та прагнення до перемог надихають ліцеїстів на активний спосіб життя.", tasks: ["Спортивні ліги та турніри", "Челенджі здорового способу життя", "Організація активного відпочинку"] },
-            info: { name: "Media Pulse", icon: ICONS.info, desc: "Ти — медіа-експерт. Твоє вміння ловити хайп та поширювати важливе робить ліцей найпомітнішим у мережі.", tasks: ["Контент-мейкінг та SMM", "Шкільне радіо та подкасти", "Зв'язки з громадськістю"] }
+            edu: { name: "Міністерство Освіти", icon: ICONS.edu, desc: "Ти — інтелектуальний лідер. Твоє місце в команді, що розвиває науковий потенціал ліцею.", tasks: ["Організація олімпіад та квізів", "Проєкти взаємодопомоги у навчанні", "Розвиток наукових гуртків"] },
+            disc: { name: "Міністерство Дисципліни", icon: ICONS.disc, desc: "Ти — гарант порядку. Твоя здатність організовувати процеси допоможе ліцею бути безпечним та комфортним.", tasks: ["Координація самоврядування", "Контроль етики та правил ліцею", "Управління ресурсами"] },
+            cult: { name: "Міністерство Культури", icon: ICONS.cult, desc: "Ти — креативне серце Парламенту. Твої ідеї зроблять позакласне життя ліцею незабутнім.", tasks: ["Організація свят та концертів", "Дизайн та арт-проєкти", "Підтримка творчих талантів"] },
+            sport: { name: "Міністерство Спорту", icon: ICONS.sport, desc: "Ти — джерело енергії. Твоє завдання — заряджати ліцеїстів на активний та здоровий спосіб життя.", tasks: ["Спортивні ліги та турніри", "Челенджі здорового способу життя", "Активний відпочинок"] },
+            info: { name: "Міністерство Інформації", icon: ICONS.info, desc: "Ти — голос Парламенту. Твої навички медіа-експерта зроблять наш ліцей найвідомішим у мережі.", tasks: ["Контент-мейкінг та SMM", "Шкільне радіо та подкасти", "Зв'язки з громадськістю"] }
         }
     };
 
@@ -505,7 +445,7 @@
         const total = surveyData.questions.length;
         
         document.getElementById('u-bar').style.width = `${(step / total) * 100}%`;
-        document.getElementById('u-counter').innerText = `Question ${String(step + 1).padStart(2, '0')}`;
+        document.getElementById('u-counter').innerText = `Питання ${String(step + 1).padStart(2, '0')}`;
         document.getElementById('u-question').innerText = qData.q;
         
         const optionsBox = document.getElementById('u-options');
