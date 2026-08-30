@@ -20,12 +20,7 @@
             --glass: blur(25px);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -37,7 +32,6 @@
             overflow-x: hidden;
         }
 
-        /* Анімований фон */
         body::before {
             content: '';
             position: fixed;
@@ -56,48 +50,20 @@
             flex-direction: column;
         }
 
-        /* Хедер */
-        .u-header {
-            text-align: center;
-            margin-bottom: 24px;
-            padding-top: 10px;
-        }
-
+        .u-header { text-align: center; margin-bottom: 24px; padding-top: 10px; }
         .u-logo {
-            width: 64px;
-            height: 64px;
-            border-radius: 16px;
-            background: white;
-            padding: 6px;
-            box-shadow: 0 0 25px rgba(99, 102, 241, 0.25);
-            margin-bottom: 12px;
+            width: 64px; height: 64px; border-radius: 16px; background: white;
+            padding: 6px; box-shadow: 0 0 25px rgba(99, 102, 241, 0.25); margin-bottom: 12px;
         }
 
         .u-header h1 {
-            font-size: 18px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            background: var(--grad);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 18px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+            background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        .u-header p {
-            font-size: 12px;
-            color: var(--text-dim);
-            margin-top: 4px;
-        }
-
-        /* Картки */
         .u-card {
-            background: var(--card-bg);
-            backdrop-filter: var(--glass);
-            -webkit-backdrop-filter: var(--glass);
-            border: 1px solid var(--border);
-            border-radius: 30px;
-            padding: 24px;
-            display: none;
+            background: var(--card-bg); backdrop-filter: var(--glass); -webkit-backdrop-filter: var(--glass);
+            border: 1px solid var(--border); border-radius: 30px; padding: 24px; display: none;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             animation: cardIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
@@ -109,190 +75,64 @@
 
         .u-card.active { display: block; }
 
-        /* Відео 9:16 без обрізань */
+        /* ВІДЕО КОНТЕЙНЕР 9:16 */
         .u-video-box {
-            position: relative;
-            width: 100%;
-            max-height: 70vh;
-            background: #000;
-            border-radius: 24px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--border);
-            margin-bottom: 15px;
+            position: relative; width: 100%; max-height: 72vh; background: #000;
+            border-radius: 24px; overflow: hidden; display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--border); margin-bottom: 15px;
         }
 
-        #introVideo {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
+        #introVideo { width: 100%; height: 100%; object-fit: contain; }
 
         .u-video-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.85));
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 24px;
-            z-index: 2;
+            position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.9));
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 24px; z-index: 2; text-align: center;
         }
+
+        .u-video-overlay.hidden { display: none; }
 
         .btn-play {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            background: white;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            margin-bottom: 16px;
-            transition: transform 0.2s;
+            width: 72px; height: 72px; border-radius: 50%; background: white; border: none;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            margin-bottom: 16px; box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
         }
 
-        .btn-play:active { transform: scale(0.9); }
-        .btn-play svg { width: 24px; height: 24px; fill: #000; margin-left: 4px; }
+        .btn-play svg { width: 28px; height: 28px; fill: #000; margin-left: 4px; }
 
-        /* Тестування */
-        .u-progress {
-            height: 4px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 2px;
-            margin-bottom: 24px;
-            overflow: hidden;
+        /* КНОПКИ */
+        .u-btn-main {
+            background: var(--grad); color: white; border: none; padding: 18px;
+            border-radius: 20px; font-size: 16px; font-weight: 700; cursor: pointer;
+            width: 100%; margin-top: 15px; box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
         }
 
-        .u-progress-bar {
-            height: 100%;
-            background: var(--grad);
-            width: 0%;
-            transition: width 0.4s ease;
+        .u-btn-secondary {
+            background: transparent; border: 1px solid var(--border); color: var(--text-dim);
+            padding: 14px; border-radius: 18px; font-size: 14px; font-weight: 600; cursor: pointer;
+            width: 100%; margin-top: 10px;
         }
 
-        .u-step-label {
-            font-size: 11px;
-            font-weight: 800;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .u-question {
-            font-size: 20px;
-            font-weight: 600;
-            line-height: 1.4;
-            margin-bottom: 24px;
-        }
-
+        /* ТЕСТ */
+        .u-progress { height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px; margin-bottom: 24px; overflow: hidden; }
+        .u-progress-bar { height: 100%; background: var(--grad); width: 0%; transition: width 0.4s ease; }
+        .u-step-label { font-size: 11px; font-weight: 800; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+        .u-question { font-size: 20px; font-weight: 600; line-height: 1.4; margin-bottom: 24px; }
         .u-option {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            padding: 16px 20px;
-            border-radius: 20px;
-            color: var(--text-main);
-            text-align: left;
-            font-size: 15px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 10px;
-            transition: 0.2s;
-            width: 100%;
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 16px 20px;
+            border-radius: 20px; color: var(--text-main); text-align: left; font-size: 15px;
+            cursor: pointer; display: flex; align-items: center; gap: 16px; margin-bottom: 10px; width: 100%; transition: 0.2s;
         }
-
-        .u-option:hover {
-            background: rgba(99, 102, 241, 0.1);
-            border-color: var(--accent);
-        }
-
+        .u-option:hover { background: rgba(99, 102, 241, 0.1); border-color: var(--accent); }
         .u-option svg { width: 22px; height: 22px; stroke: var(--accent); flex-shrink: 0; }
 
-        /* Результат */
-        .u-res-head {
-            width: 80px;
-            height: 80px;
-            background: var(--grad);
-            border-radius: 24px;
-            margin: 0 auto 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 25px var(--accent-glow);
-        }
-
+        /* РЕЗУЛЬТАТ */
+        .u-res-head { width: 80px; height: 80px; background: var(--grad); border-radius: 24px; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; }
         .u-res-head svg { width: 40px; height: 40px; stroke: white; }
-
-        .u-pledge-box {
-            background: rgba(0,0,0,0.2);
-            border-radius: 20px;
-            padding: 20px;
-            margin-top: 24px;
-            border: 1px dashed var(--border);
-            text-align: left;
-        }
-
-        .u-pledge-title {
-            font-size: 11px;
-            font-weight: 800;
-            color: var(--accent);
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .u-pledge-text {
-            font-size: 13px;
-            font-style: italic;
-            line-height: 1.6;
-            color: var(--text-dim);
-        }
-
-        .u-btn-main {
-            background: var(--grad);
-            color: white;
-            border: none;
-            padding: 18px;
-            border-radius: 20px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 24px;
-        }
-
-        .u-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid var(--accent);
-            border-radius: 100px;
-            color: var(--accent);
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-
-        .u-task {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            color: var(--text-dim);
-            margin-bottom: 8px;
-            text-align: left;
-        }
-
+        .u-pledge-box { background: rgba(0,0,0,0.2); border-radius: 20px; padding: 20px; margin-top: 24px; border: 1px dashed var(--border); text-align: left; }
+        .u-pledge-text { font-size: 13px; font-style: italic; line-height: 1.6; color: var(--text-dim); }
+        .u-badge { display: inline-block; padding: 4px 12px; background: rgba(99, 102, 241, 0.1); border: 1px solid var(--accent); border-radius: 100px; color: var(--accent); font-size: 10px; font-weight: 800; text-transform: uppercase; margin-bottom: 12px; }
+        .u-task { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-dim); margin-bottom: 8px; text-align: left; }
         .u-task svg { width: 16px; height: 16px; stroke: var(--accent); flex-shrink: 0; }
     </style>
 </head>
@@ -302,33 +142,30 @@
     <header class="u-header">
         <img src="https://i0.wp.com/ilschool6.com/wp-content/uploads/2017/05/school.png" class="u-logo" alt="Logo">
         <h1>Парламент Ліцею №6</h1>
-        <p>Для учнів 5-11 класів • Самоврядування</p>
+        <p>Твій шлях до Кабінету Міністрів| для 5-11 класів</p>
     </header>
 
     <!-- ЕКРАН ВІДЕО -->
     <div id="card-video" class="u-card active" style="padding: 0; background: transparent; border: none; box-shadow: none;">
         <div class="u-video-box">
-            <video id="introVideo" playsinline>
+            <video id="introVideo" playsinline preload="metadata">
                 <source src="video.mp4" type="video/mp4">
             </video>
             <div id="videoOverlay" class="u-video-overlay">
-                <button class="btn-play" onclick="runIntro()">
+                <button class="btn-play" id="mainPlayBtn" onclick="runIntro()">
                     <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 </button>
-                <h2 style="font-size: 22px; margin-bottom: 8px;">Твій голос має силу</h2>
-                <p style="color: var(--text-dim); font-size: 14px;">Дізнайся, як працює наш Парламент</p>
-                <button style="background:none; border:none; color:white; margin-top:20px; cursor:pointer; opacity:0.6" onclick="toStart()">Пропустити відео</button>
+                <h2 id="videoTitle" style="font-size: 22px; margin-bottom: 8px;">Твій голос має силу</h2>
+                <p id="videoSubtitle" style="color: var(--text-dim); font-size: 14px; margin-bottom: 20px;">Поглянь, як працює наш Парламент</p>
+                
+                <div id="afterVideoBtns" style="display: none; width: 100%; padding: 0 20px;">
+                    <button class="u-btn-main" onclick="toSurvey()">ПОЧАТИ ТЕСТУВАННЯ</button>
+                    <button class="u-btn-secondary" onclick="runIntro()">Подивитися ще раз</button>
+                </div>
+                
+                <button id="skipBtn" style="background:none; border:none; color:white; margin-top:10px; cursor:pointer; opacity:0.6; font-size: 14px;" onclick="toSurvey()">Пропустити відео</button>
             </div>
         </div>
-    </div>
-
-    <!-- ЕКРАН СТАРТУ -->
-    <div id="card-start" class="u-card" style="text-align: center;">
-        <div class="u-badge">Синхронізація лідера</div>
-        <h2 style="font-size: 26px; margin-bottom: 12px;">Знайди свою роль</h2>
-        <p style="color: var(--text-dim); margin-bottom: 24px; line-height: 1.6;">Пройди 15 ситуаційних кейсів, щоб визначити, у якому Міністерстві ти зможеш найкраще реалізувати свій потенціал.</p>
-        <button class="u-btn-main" onclick="toSurvey()">РОЗПОЧАТИ</button>
-        <p style="margin-top:15px; font-size:11px; color:var(--text-dim)">Підготуйся до вибору </p>
     </div>
 
     <!-- ЕКРАН ТЕСТУ -->
@@ -349,10 +186,7 @@
         <div id="res-tasks"></div>
 
         <div class="u-pledge-box">
-            <div class="u-pledge-title">
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
-                Ти готовий вимовити ці слова? Офіційна присяга депутата
-            </div>
+            <p style="font-size: 11px; font-weight: 800; color: var(--accent); text-transform: uppercase; margin-bottom: 8px;">Готовий вимовити ці слова ?  Офіційна присяга депутата</p>
             <p class="u-pledge-text">"Присягаю на вірність Школі. Зобов'язуюсь усіма своїми діями дбати про її честь та статус, дбати про благо громади та неухильно дотримуватись Конституції ліцею."</p>
         </div>
 
@@ -390,7 +224,7 @@
             { q: "Однокласнику важко з темою. Як допоможеш?", options: [
                 { t: "Буду пояснювати, доки не зрозуміє", s: { edu: 3 }, i: ICONS.edu },
                 { t: "Знайду крутий відеоурок у мережі", s: { info: 3 }, i: ICONS.info },
-                { t: "Організую спільну підготовку групи", s: { edu: 3 }, i: ICONS.edu }
+                { t: "Організовую спільну підготовку групи", s: { edu: 3 }, i: ICONS.edu }
             ]},
             { q: "Вільна перерва. Куди витратиш енергію?", options: [
                 { t: "Запропоную активний спортивний батл", s: { sport: 3 }, i: ICONS.sport },
@@ -460,21 +294,32 @@
     let step = 0;
     let score = { edu: 0, disc: 0, cult: 0, sport: 0, info: 0 };
     const video = document.getElementById('introVideo');
+    const overlay = document.getElementById('videoOverlay');
+    const afterVideoBtns = document.getElementById('afterVideoBtns');
+    const playBtn = document.getElementById('mainPlayBtn');
+    const videoTitle = document.getElementById('videoTitle');
+    const videoSubtitle = document.getElementById('videoSubtitle');
+    const skipBtn = document.getElementById('skipBtn');
 
     function runIntro() {
-        document.getElementById('videoOverlay').style.display = 'none';
+        overlay.classList.add('hidden');
+        video.currentTime = 0;
         video.play();
-        video.onended = toStart;
     }
 
-    function toStart() {
-        video.pause();
-        document.getElementById('card-video').classList.remove('active');
-        document.getElementById('card-start').classList.add('active');
-    }
+    // ЛОГІКА ЗАВЕРШЕННЯ ВІДЕО
+    video.onended = function() {
+        overlay.classList.remove('hidden');
+        playBtn.style.display = 'none'; // Ховаємо стару кнопку Play
+        videoTitle.innerText = "Відео завершено";
+        videoSubtitle.innerText = "Ти готовий визначити свою роль?";
+        afterVideoBtns.style.display = 'block'; // Показуємо нові кнопки
+        skipBtn.style.display = 'none'; // Ховаємо кнопку пропуску
+    };
 
     function toSurvey() {
-        document.getElementById('card-start').classList.remove('active');
+        video.pause();
+        document.getElementById('card-video').classList.remove('active');
         document.getElementById('card-survey').classList.add('active');
         drawQuestion();
     }
