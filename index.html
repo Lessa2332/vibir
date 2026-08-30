@@ -2,11 +2,24 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <meta name="description" content="Оновлена анкета учнівського самоврядування Чорноморського ліцею №6">
-    <meta name="theme-color" content="#2c5aa0">
-    <title>Твоє міністерство | Чорноморський ліцей №6</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>U-GOV | Чорноморський ліцей №6</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #0a0a0f;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.1);
+            --accent: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.5);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --grad: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --safe-area: env(safe-area-inset-bottom);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,627 +27,519 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        :root {
-            --primary-color: #2c5aa0;
-            --secondary-color: #4a90e2;
-            --accent-color: #f5a623;
-            --text-color: #333;
-            --bg-color: #f5f7fa;
-            --white: #ffffff;
-            --success: #7ed321;
-            --border-radius: 16px;
-            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.15);
-        }
-
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: var(--text-color);
-            line-height: 1.6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            overflow-x: hidden;
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            padding: 20px;
+            line-height: 1.5;
         }
 
-        .container {
+        /* Animated Background Gear */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        .app-container {
             width: 100%;
-            max-width: 600px;
+            max-width: 480px;
+            padding: 24px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            min-height: 100vh;
         }
 
-        /* HEADER */
-        .header {
-            background: var(--white);
-            border-radius: var(--border-radius);
-            padding: 25px;
+        /* Header UI */
+        .u-header {
             text-align: center;
-            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            padding-top: 20px;
         }
 
-        .school-logo {
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
-            margin-bottom: 15px;
-            border-radius: 50%;
-            border: 4px solid var(--primary-color);
-            background: white;
-        }
-
-        h1 {
-            color: var(--primary-color);
-            font-size: clamp(1.2rem, 5vw, 1.6rem);
-            margin-bottom: 8px;
-            line-height: 1.2;
-        }
-
-        .subtitle {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* VIDEO SECTION */
-        .video-intro {
+        .u-logo-wrapper {
             position: relative;
-            width: 100%;
-            background: #000;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            aspect-ratio: 9 / 16;
-            max-height: 65vh;
+            display: inline-block;
+            margin-bottom: 16px;
         }
 
-        video {
+        .u-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 22px;
+            background: white;
+            padding: 10px;
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .u-header h1 {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Glass Cards */
+        .u-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            padding: 32px;
+            display: none;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            animation: cardAppear 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        @keyframes cardAppear {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .u-card.active { display: block; }
+
+        /* Video Section Modernized */
+        .u-video-box {
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 9/16;
+            margin-bottom: 24px;
+            border: 1px solid var(--border);
+        }
+
+        #introVideo {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .video-overlay {
+        .u-video-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(0, 0, 0, 0.4);
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            color: white;
+            align-items: center;
+            padding: 30px;
             text-align: center;
-            padding: 20px;
-            transition: opacity 0.5s;
         }
 
-        .video-overlay.hidden { opacity: 0; pointer-events: none; }
-
-        .play-button {
-            width: 70px;
-            height: 70px;
+        .btn-play {
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
-            background: var(--white);
+            background: var(--text-main);
             border: none;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 15px;
-            box-shadow: 0 0 20px rgba(255,255,255,0.4);
-        }
-
-        .play-button::before {
-            content: '';
-            border-left: 20px solid var(--primary-color);
-            border-top: 12px solid transparent;
-            border-bottom: 12px solid transparent;
-            margin-left: 5px;
-        }
-
-        .video-controls {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-        }
-
-        .skip-btn {
-            background: rgba(255, 255, 255, 0.9);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: bold;
             cursor: pointer;
-            box-shadow: var(--shadow);
-        }
-
-        /* CARDS & SURVEY */
-        .card {
-            background: var(--white);
-            border-radius: var(--border-radius);
-            padding: 25px;
-            box-shadow: var(--shadow);
-            display: none;
-        }
-
-        .card.active { display: block; animation: slideUp 0.4s ease-out; }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .question-text {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary-color);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             margin-bottom: 20px;
         }
 
-        .options-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        .btn-play:hover { transform: scale(1.1); }
+
+        .btn-play svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--bg);
+            margin-left: 4px;
         }
 
-        .option-btn {
-            background: var(--bg-color);
-            border: 2px solid #edf2f7;
-            padding: 16px;
-            border-radius: 12px;
-            text-align: left;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: all 0.2s;
-            font-size: 1rem;
-            width: 100%;
-        }
-
-        .option-btn:hover {
-            border-color: var(--secondary-color);
-            background: #eef6ff;
-            transform: translateX(5px);
-        }
-
-        .option-icon { font-size: 1.5rem; min-width: 30px; text-align: center; }
-
-        /* PROGRESS */
-        .progress-container {
-            margin-bottom: 10px;
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 4px;
+        /* Survey UI */
+        .u-progress-track {
+            height: 6px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            margin-bottom: 32px;
             overflow: hidden;
         }
 
-        .progress-fill {
+        .u-progress-fill {
             height: 100%;
-            background: var(--accent-color);
+            background: var(--grad);
             width: 0%;
-            transition: width 0.3s ease;
+            transition: width 0.4s ease;
+            box-shadow: 0 0 15px var(--accent-glow);
         }
 
-        /* RESULT SCREEN */
-        .result-card {
+        .u-question {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text-main);
+        }
+
+        .u-options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .u-option-btn {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            padding: 18px 24px;
+            border-radius: 20px;
+            color: var(--text-main);
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.25s ease;
+        }
+
+        .u-option-btn:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--accent);
+            transform: scale(1.02);
+        }
+
+        .u-option-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--accent);
+            flex-shrink: 0;
+        }
+
+        /* Result Visuals */
+        .u-result-id {
             text-align: center;
         }
 
-        .ministry-badge {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 30px 20px;
-            border-radius: var(--border-radius);
-            margin: 20px 0;
+        .u-ministry-icon-box {
+            width: 100px;
+            height: 100px;
+            background: var(--grad);
+            border-radius: 30px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
         }
 
-        .ministry-icon { font-size: 4rem; margin-bottom: 10px; }
-        .ministry-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; }
+        .u-ministry-icon-box svg {
+            width: 50px;
+            height: 50px;
+            stroke: white;
+            stroke-width: 1.5;
+        }
 
-        .tasks-list {
+        .u-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid var(--accent);
+            border-radius: 100px;
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .u-task-grid {
             text-align: left;
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 15px;
+            margin-top: 24px;
+            display: grid;
+            gap: 10px;
         }
 
-        .tasks-list h3 { font-size: 1rem; margin-bottom: 10px; color: var(--primary-color); }
-        .tasks-list ul { list-style: none; }
-        .tasks-list li {
-            position: relative;
-            padding-left: 25px;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
+        .u-task-item {
+            background: rgba(255,255,255,0.03);
+            padding: 14px 18px;
+            border-radius: 16px;
+            font-size: 14px;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .tasks-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--success);
-            font-weight: bold;
+        .u-task-item svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--accent);
+            flex-shrink: 0;
         }
 
-        .btn-action {
-            background: var(--primary-color);
+        /* Main Button */
+        .u-btn-primary {
+            background: var(--grad);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 12px;
-            font-weight: bold;
-            width: 100%;
-            margin-top: 15px;
+            padding: 20px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 800;
             cursor: pointer;
-            font-size: 1rem;
+            width: 100%;
+            margin-top: 24px;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
         }
 
-        .hidden { display: none !important; }
+        .u-btn-primary:active { transform: scale(0.98); }
 
-        @media (max-width: 480px) {
-            .container { padding: 10px; }
-            .card { padding: 20px 15px; }
-            .video-intro { max-height: 55vh; }
+        .u-skip {
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 10px;
         }
+
+        /* Hide Scrollbar */
+        ::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header class="header">
-        <img src="https://i0.wp.com/ilschool6.com/wp-content/uploads/2017/05/school.png" alt="Logo" class="school-logo">
-        <h1>Самоврядування Чорноморського ліцею №6</h1>
-        <p class="subtitle">Пройди тест та знайди своє місце в команді!</p>
+<div class="app-container">
+    <header class="u-header">
+        <div class="u-logo-wrapper">
+            <img src="https://i0.wp.com/ilschool6.com/wp-content/uploads/2017/05/school.png" class="u-logo" alt="Ліцей 6">
+        </div>
+        <h1>U-GOV : 2026</h1>
     </header>
 
-    <!-- VIDEO INTRO -->
-    <div id="videoSection" class="video-intro">
-        <video id="introVideo" playsinline poster="https://i0.wp.com/ilschool6.com/wp-content/uploads/2017/05/school.png">
-            <source src="video.mp4" type="video/mp4">
-        </video>
-        <div id="videoOverlay" class="video-overlay">
-            <button class="play-button" id="playBtn" onclick="startVideo()"></button>
-            <h2>Привіт! Я — твій гід</h2>
-            <p>Дізнайся, як ти можеш змінити ліцей</p>
-        </div>
-        <div class="video-controls">
-            <button class="skip-btn" onclick="skipToStart()">Пропустити ▶</button>
+    <!-- INTRO VIDEO CARD -->
+    <div id="card-video" class="u-card active" style="padding: 10px;">
+        <div class="u-video-box">
+            <video id="introVideo" playsinline>
+                <source src="video.mp4" type="video/mp4">
+            </video>
+            <div id="videoOverlay" class="u-video-overlay">
+                <button class="btn-play" onclick="playIntro()">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <h2 style="font-size: 24px; margin-bottom: 10px;">Твій голос має силу</h2>
+                <p style="color: var(--text-dim); font-size: 15px;">Дізнайся, як ти можеш прокачати свій ліцей</p>
+                <button class="u-skip" onclick="toStart()">Пропустити відео</button>
+            </div>
         </div>
     </div>
 
     <!-- START CARD -->
-    <div id="startCard" class="card">
-        <h2 style="margin-bottom:15px; color:var(--primary-color)">Готовий розпочати?</h2>
-        <p style="margin-bottom:20px">Ця анкета містить 15 життєвих ситуацій. Твої відповіді допоможуть визначити, до якого міністерства твої таланти підходять найбільше.</p>
-        <div style="background:#eef6ff; padding:15px; border-radius:12px; font-size:0.85rem; margin-bottom:20px">
-            <strong>ℹ️ Примітка:</strong> Результат є рекомендацією. Ти можеш обрати будь-яке міністерство, де хочеш розвиватися!
-        </div>
-        <button class="btn-action" onclick="startSurvey()">Почати опитування</button>
+    <div id="card-start" class="u-card">
+        <div class="u-badge">Mission Start</div>
+        <h2 style="font-size: 28px; margin-bottom: 16px;">Готовий до змін?</h2>
+        <p style="color: var(--text-dim); margin-bottom: 32px;">Ми підготували 15 ситуаційних кейсів. Твої рішення визначать твою роль у Кабінеті Міністрів ліцею.</p>
+        <button class="u-btn-primary" onclick="startSurvey()">РОЗПОЧАТИ СИНХРОНІЗАЦІЮ</button>
     </div>
 
     <!-- SURVEY CARD -->
-    <div id="surveyCard" class="card">
-        <div class="progress-container">
-            <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:5px">
-                <span id="progressText">Питання 1 з 15</span>
-                <span id="percentText">0%</span>
-            </div>
-            <div class="progress-bar">
-                <div id="progressFill" class="progress-fill"></div>
-            </div>
+    <div id="card-survey" class="u-card">
+        <div class="u-progress-track">
+            <div id="u-bar" class="u-progress-fill"></div>
         </div>
-        <div id="questionText" class="question-text"></div>
-        <div id="optionsList" class="options-list"></div>
+        <p id="u-counter" style="color: var(--accent); font-size: 12px; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">Question 01</p>
+        <div id="u-question" class="u-question"></div>
+        <div id="u-options" class="u-options"></div>
     </div>
 
     <!-- RESULT CARD -->
-    <div id="resultCard" class="card result-card">
-        <h2 color="var(--primary-color)">Твій результат:</h2>
-        <div class="ministry-badge">
-            <div id="resIcon" class="ministry-icon"></div>
-            <div id="resName" class="ministry-title"></div>
-            <p id="resDesc" style="font-size:0.95rem; opacity:0.9"></p>
+    <div id="card-result" class="u-card u-result-id">
+        <div class="u-badge">Analysis Complete</div>
+        <div class="u-ministry-icon-box" id="res-icon-box">
+            <!-- SVG will be injected here -->
         </div>
+        <h2 id="res-name" style="font-size: 24px; margin-bottom: 12px;"></h2>
+        <p id="res-desc" style="color: var(--text-dim); font-size: 14px; margin-bottom: 24px; padding: 0 10px;"></p>
         
-        <div class="tasks-list">
-            <h3>Твої майбутні завдання:</h3>
-            <ul id="resTasks"></ul>
+        <div class="u-task-grid" id="res-tasks">
+            <!-- Tasks will be injected here -->
         </div>
 
-        <button class="btn-action" onclick="location.reload()">Пройти ще раз</button>
-        <p style="margin-top:20px; font-size:0.8rem; color:#666">Звернись до Президента ліцею, щоб долучитися до команди!</p>
+        <button class="u-btn-primary" onclick="location.reload()">ПЕРЕЗАВАНТАЖИТИ</button>
     </div>
 </div>
 
 <script>
-    // --- ДАНІ АНКЕТИ (15 ситуаційних кейсів) ---
+    // --- VECTOR ICONS (SVG PATHS) ---
+    const ICONS = {
+        edu: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`,
+        disc: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+        cult: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>`,
+        sport: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
+        info: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>`,
+        check: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>`,
+        arrow: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`
+    };
+
     const surveyData = {
         questions: [
-            {
-                q: "У коридорі гамір, і хтось випадково розсипав стопку важливих паперів. Твоя реакція?",
-                options: [
-                    { t: "Швидко допомагаю зібрати та розкласти все за порядком", i: "🛡️", s: { discipline: 3 } },
-                    { t: "Роблю фото, щоб повідомити в чаті про знахідку", i: "📱", s: { info: 2 } },
-                    { t: "Питаю, чи це не матеріали для олімпіади", i: "📚", s: { education: 1 } }
-                ]
-            },
-            {
-                q: "Клас має 15 хвилин, щоб представити себе на лінійці. Що запропонуєш?",
-                options: [
-                    { t: "Вигадати цікавий девіз або творчу сценку", i: "🎭", s: { culture: 3 } },
-                    { t: "Скласти чіткий звіт про досягнення класу", i: "📊", s: { education: 2 } },
-                    { t: "Зробити яскравий плакат-представлення", i: "🎨", s: { culture: 2, info: 1 } }
-                ]
-            },
-            {
-                q: "У класному чаті суперечка щодо правил поведінки на екскурсії. Що зробиш?",
-                options: [
-                    { t: "Нагадаю правила безпеки та закличу до порядку", i: "⚖️", s: { discipline: 3 } },
-                    { t: "Запропоную провести голосування, щоб знайти компроміс", i: "📩", s: { info: 2 } },
-                    { t: "Проігнорую суперечку, але підготую цікаві факти про місце поїздки", i: "📖", s: { education: 2 } }
-                ]
-            },
-            {
-                q: "Однокласник взагалі не розуміє складну тему з уроку. Твої дії?",
-                options: [
-                    { t: "З радістю поясню матеріал простими словами", i: "🧠", s: { education: 3 } },
-                    { t: "Пораджу корисні відеоуроки або статті", i: "💻", s: { info: 2 } },
-                    { t: "Запропоную організувати групу взаємодопомоги", i: "👥", s: { education: 2 } }
-                ]
-            },
-            {
-                q: "На фізкультурі залишилося 10 хвилин вільного часу. Чим займешся?",
-                options: [
-                    { t: "Організую швидку командну гру чи естафету", i: "⚽", s: { sport: 3 } },
-                    { t: "Буду вболівати та знімати гру на відео для сторінки класу", i: "📸", s: { info: 2 } },
-                    { t: "Повторю правила гри, щоб не було порушень", i: "🛡️", s: { discipline: 2 } }
-                ]
-            },
-            {
-                q: "У школі відбулася крута акція, але про неї майже ніхто не знає. Твої дії?",
-                options: [
-                    { t: "Зніму сторіз або напишу пост у соцмережі", i: "📱", s: { info: 3 } },
-                    { t: "Розповім усім знайомим особисто", i: "🗣️", s: { info: 2, culture: 1 } },
-                    { t: "Запропоную зробити цю акцію регулярною та внести в план", i: "📅", s: { discipline: 2 } }
-                ]
-            },
-            {
-                q: "Шкільний куточок до свята порожній, а залишився лише день. Що зробиш?",
-                options: [
-                    { t: "Швидко створю декор або намалюю плакат", i: "🎨", s: { culture: 3 } },
-                    { t: "Організую чергування, щоб встигнути все прибрати й прикрасити", i: "🛡️", s: { discipline: 2 } },
-                    { t: "Напишу оголошення, щоб залучити помічників", i: "📢", s: { info: 2 } }
-                ]
-            },
-            {
-                q: "Усі розгублені, бо не знають, у якому кабінеті наступний урок. Твій вихід?",
-                options: [
-                    { t: "Піду до вчителя, дізнаюся точно і оголошу всім", i: "🔍", s: { info: 3 } },
-                    { t: "Перевірю офіційний розклад на стенді чи сайті", i: "📋", s: { discipline: 2 } },
-                    { t: "Поки чекаємо, запропоную обговорити домашнє завдання", i: "📚", s: { education: 2 } }
-                ]
-            },
-            {
-                q: "У їдальні створюється хаос і штовханина. Як зреагуєш?",
-                options: [
-                    { t: "Організую учнів у рівну чергу та стежитиму за порядком", i: "🛡️", s: { discipline: 3 } },
-                    { t: "Зроблю зауваження тим, хто порушує правила", i: "🚫", s: { discipline: 2 } },
-                    { t: "Запропоную розробити графік відвідування для класів", i: "📝", s: { education: 1, discipline: 2 } }
-                ]
-            },
-            {
-                q: "Учитель затримується, і клас не знає, чим зайнятися. Твоя пропозиція?",
-                options: [
-                    { t: "Пропоную зіграти в інтелектуальну вікторину", i: "🧩", s: { education: 3 } },
-                    { t: "Покажу всім цікаве відео по темі уроку", i: "🎥", s: { info: 2 } },
-                    { t: "Стежитиму, щоб у класі було тихо до приходу вчителя", i: "🤫", s: { discipline: 2 } }
-                ]
-            },
-            {
-                q: "Школі потрібно зібрати команду на змагання. Що зробиш?",
-                options: [
-                    { t: "Першим запишуся і буду тренуватися щодня", i: "🏃", s: { sport: 3 } },
-                    { t: "Зроблю круту афішу-заклик для набору команди", i: "📣", s: { info: 2 } },
-                    { t: "Допоможу з підготовкою форми та інвентарю", i: "🎒", s: { discipline: 2 } }
-                ]
-            },
-            {
-                q: "До вас у клас прийшов новий учень і він дуже соромиться. Як допоможеш?",
-                options: [
-                    { t: "Познайомлю з усіма та запрошу до нашої компанії", i: "🤝", s: { info: 2, culture: 2 } },
-                    { t: "Покажу, де знаходяться кабінети, бібліотека та спортзал", i: "🏫", s: { info: 2 } },
-                    { t: "Допоможу розібратися з новими шкільними правилами", i: "🛡️", s: { discipline: 2 } }
-                ]
-            },
-            {
-                q: "Оголошено день без шкільної форми у певному стилі. Твій підхід?",
-                options: [
-                    { t: "Придумаю найяскравіший образ і допоможу друзям", i: "🎭", s: { culture: 3 } },
-                    { t: "Зроблю фоторепортаж про найстильніших учнів ліцею", i: "📸", s: { info: 3 } },
-                    { t: "Стежитиму, щоб креатив не заважав навчальному процесу", i: "📏", s: { discipline: 2 } }
-                ]
-            },
-            {
-                q: "Школа вирішила проводити руханку перед уроками. Твоя роль?",
-                options: [
-                    { t: "Буду показувати вправи під музику перед учнями", i: "💪", s: { sport: 3 } },
-                    { t: "Підберу драйвовий плейлист для занять", i: "🎵", s: { culture: 2 } },
-                    { t: "Напишу статтю про користь ранкової зарядки", i: "📰", s: { info: 2 } }
-                ]
-            },
-            {
-                q: "Потрібно зібрати кошти на допомогу притулку тварин. Як допоможеш?",
-                options: [
-                    { t: "Організую ярмарок випічки чи виробів ручної роботи", i: "🧁", s: { culture: 3 } },
-                    { t: "Розроблю систему обліку зібраних коштів та звітність", i: "📊", s: { discipline: 2, education: 1 } },
-                    { t: "Зроблю зворушливе відео про тварин для збору", i: "🐾", s: { info: 3 } }
-                ]
-            }
+            { q: "У коридорі гамір, і хтось розсипав важливі папери. Твоя миттєва реакція?", options: [
+                { t: "Допомагаю зібрати та розкласти все по папках", s: { disc: 3 }, i: ICONS.disc },
+                { t: "Зроблю фото та викладу в чат, щоб знайшли власника", s: { info: 3 }, i: ICONS.info },
+                { t: "Питаю, чи це не тези для наукової конференції", s: { edu: 3 }, i: ICONS.edu }
+            ]},
+            { q: "Клас має 15 хвилин, щоб підготувати виступ. Що візьмеш на себе?", options: [
+                { t: "Придумаю креативний сценарій чи візуальні ефекти", s: { cult: 3 }, i: ICONS.cult },
+                { t: "Складу чіткий план і розподілю ролі", s: { disc: 3 }, i: ICONS.disc },
+                { t: "Зафіксую все на відео для шкільного архіву", s: { info: 3 }, i: ICONS.info }
+            ]},
+            { q: "У шкільному чаті суперечка про правила. Як дієш?", options: [
+                { t: "Наводжу аргументи з офіційного статуту ліцею", s: { disc: 3 }, i: ICONS.disc },
+                { t: "Створюю опитування, щоб почути кожного", s: { info: 3 }, i: ICONS.info },
+                { t: "Пропоную мирний спосіб вирішення конфлікту через арт-проєкт", s: { cult: 3 }, i: ICONS.cult }
+            ]},
+            { q: "Друг не розуміє складну тему перед тестом. Твоя допомога?", options: [
+                { t: "Пояснюю на пальцях, поки не стане зрозуміло", s: { edu: 3 }, i: ICONS.edu },
+                { t: "Скидаю посилання на круту статтю чи відеоурок", s: { info: 3 }, i: ICONS.info },
+                { t: "Організовую спільний коворкінг після уроків", s: { edu: 2, disc: 1 }, i: ICONS.edu }
+            ]},
+            { q: "На перерві залишився вільний час. Чим займешся?", options: [
+                { t: "Запропоную швидкий челендж чи розминку", s: { sport: 3 }, i: ICONS.sport },
+                { t: "Буду монтувати влог про життя в ліцеї", s: { info: 3 }, i: ICONS.info },
+                { t: "Прогляну цікавий TED-talk або новини науки", s: { edu: 3 }, i: ICONS.edu }
+            ]},
+            { q: "У ліцеї відбулася крута подія, але про неї мало знають. Що зробиш?", options: [
+                { t: "Змонтую динамічний Reels і викладу в мережу", s: { info: 3 }, i: ICONS.info },
+                { t: "Запропоную зробити це традицією в календарі ліцею", s: { disc: 3 }, i: ICONS.disc },
+                { t: "Зроблю яскраві афіші в графічному редакторі", s: { cult: 3 }, i: ICONS.cult }
+            ]},
+            { q: "Зал до свята не прикрашений, а гості будуть за годину. Твої дії?", options: [
+                { t: "Швидко зберу команду і поставлю завдання кожному", s: { disc: 3 }, i: ICONS.disc },
+                { t: "Згенерую креативну ідею з підручних матеріалів", s: { cult: 3 }, i: ICONS.cult },
+                { t: "Зроблю прямий ефір підготовки, щоб залучити волонтерів", s: { info: 3 }, i: ICONS.info }
+            ]},
+            { q: "Ніхто не знає, де наступний урок через заміну. Де ти?", options: [
+                { t: "Вже дізнаюся номер кабінету в адміністрації", s: { info: 3 }, i: ICONS.info },
+                { t: "Перевіряю офіційний портал розкладу", s: { disc: 3 }, i: ICONS.disc },
+                { t: "Використовую час, щоб повторити матеріал", s: { edu: 3 }, i: ICONS.edu }
+            ]},
+            { q: "У їдальні черга перетворилася на хаос. Що зробиш?", options: [
+                { t: "Встановлю чітку чергу та правила для всіх", s: { disc: 3 }, i: ICONS.disc },
+                { t: "Запропоную систему електронного замовлення", s: { edu: 2, info: 1 }, i: ICONS.edu },
+                { t: "Відволіку всіх цікавою історією чи жартом", s: { cult: 3 }, i: ICONS.cult }
+            ]},
+            { q: "Учителя немає, клас нудьгує. Твоя ініціатива?", options: [
+                { t: "Проведу міні-квіз на знання мемів чи фактів", s: { edu: 3 }, i: ICONS.edu },
+                { t: "Стежитиму, щоб ніхто не порушував тишу", s: { disc: 3 }, i: ICONS.disc },
+                { t: "Запропоную зняти спільний TikTok-тренд", s: { cult: 3 }, i: ICONS.cult }
+            ]},
+            { q: "Збираємо команду на міжшкільний турнір. Що твоє?", options: [
+                { t: "Буду в центрі подій, викладатимусь на повну", s: { sport: 3 }, i: ICONS.sport },
+                { t: "Створю крутий брендінг та назву для команди", s: { info: 3 }, i: ICONS.info },
+                { t: "Проаналізую тактику суперників", s: { edu: 3 }, i: ICONS.edu }
+            ]},
+            { q: "Новенький у класі почувається невпевнено. Як допоможеш?", options: [
+                { t: "Проведу екскурсію та розповім про лайфхаки", s: { info: 3 }, i: ICONS.info },
+                { t: "Запрошу до нашої компанії на обід", s: { cult: 3 }, i: ICONS.cult },
+                { t: "Поясню систему чергування та правила ліцею", s: { disc: 3 }, i: ICONS.disc }
+            ]},
+            { q: "Дрес-код на сьогодні — Cyberpunk. Твій лук?", options: [
+                { t: "Найскладніший костюм з неоном та гаджетами", s: { cult: 3 }, i: ICONS.cult },
+                { t: "Зроблю фоторепортаж про кращі образи дня", s: { info: 3 }, i: ICONS.info },
+                { t: "Стежитиму, щоб костюми не заважали безпеці", s: { disc: 3 }, i: ICONS.disc }
+            ]},
+            { q: "Потрібна ранкова зарядка для ліцею. Як організуєш?", options: [
+                { t: "Показуватиму вправи під динамічний біт", s: { sport: 3 }, i: ICONS.sport },
+                { t: "Зроблю відео-інструкцію з правильним диханням", s: { info: 3 }, i: ICONS.info },
+                { t: "Складу плейлист, що ідеально підходить за ритмом", s: { cult: 3 }, i: ICONS.cult }
+            ]},
+            { q: "Благодійний збір для тварин. Як залучиш кошти?", options: [
+                { t: "Організую стрім чи онлайн-марафон", s: { info: 3 }, i: ICONS.info },
+                { t: "Спланую лотерею чи благодійний аукціон", s: { disc: 2, edu: 1 }, i: ICONS.edu },
+                { t: "Придумаю творчий мерч для донаторів", s: { cult: 3 }, i: ICONS.cult }
+            ]}
         ],
         ministries: {
-            education: {
-                name: "Міністерство освіти та науки",
-                icon: "🎓",
-                desc: "Ти — інтелектуальний двигун ліцею! Твоя допитливість та вміння пояснювати складне допоможуть іншим навчатися краще.",
-                tasks: [
-                    "Організація інтелектуальних турнірів та вікторин",
-                    "Допомога учням, які мають труднощі в навчанні",
-                    "Проведення предметних тижнів та наукових пікніків",
-                    "Контроль за відвідуванням та аналіз успішності"
-                ]
-            },
-            discipline: {
-                name: "Міністерство дисципліни та порядку",
-                icon: "🛡️",
-                desc: "Ти — охоронець гармонії та справедливості! Твоя організованість забезпечує комфорт та безпеку для кожного учня.",
-                tasks: [
-                    "Організація та контроль чергування класів",
-                    "Виховання дбайливого ставлення до майна ліцею",
-                    "Контроль за дотриманням правил поведінки та етики",
-                    "Допомога у забезпеченні порядку під час тривог"
-                ]
-            },
-            culture: {
-                name: "Міністерство культури та дозвілля",
-                icon: "🎭",
-                desc: "Ти — серце творчості ліцею! Твоя креативність робить шкільне життя яскравим та незабутнім.",
-                tasks: [
-                    "Організація концертів, свят та тематичних вечорів",
-                    "Пошук та підтримка талановитої молоді ліцею",
-                    "Оформлення фотозон та виставкових майданчиків",
-                    "Проведення квестів, майстер-класів та дискотек"
-                ]
-            },
-            sport: {
-                name: "Міністерство спорту і охорони здоров'я",
-                icon: "⚽",
-                desc: "Ти — символ енергії та здоров'я! Твій приклад надихає ліцеїстів на активний та здоровий спосіб життя.",
-                tasks: [
-                    "Організація спортивних змагань, кубків та турнірів",
-                    "Пропаганда здорового способу життя та спорту",
-                    "Проведення ранкових руханок та спортивних флешмобів",
-                    "Організація туристичних походів та естафет"
-                ]
-            },
-            info: {
-                name: "Міністерство інформації",
-                icon: "📱",
-                desc: "Ти — медійне обличчя ліцею! Твоє вміння працювати з інформацією робить життя ліцею прозорим та цікавим для всіх.",
-                tasks: [
-                    "Висвітлення подій у соцмережах та на сайті ліцею",
-                    "Створення фото- та відеозвітів про шкільні заходи",
-                    "Проведення опитувань думок учнів (інтерв'ю)",
-                    "Випуск шкільних новин та ведення інформаційних стендів"
-                ]
-            }
+            edu: { name: "Education Hub", icon: ICONS.edu, desc: "Ти — архітектор знань. Твій аналітичний склад розуму та жага до навчання зроблять ліцей центром інтелектуальних перемог.", tasks: ["Організація IT-хакатонів та квізів", "Проєкти взаємодопомоги у навчанні", "Робота з науковими гуртками"] },
+            disc: { name: "Order Protocol", icon: ICONS.disc, desc: "Ти — гарант стабільності. Твоя здатність структурувати хаос та підтримувати правила робить ліцей безпечним місцем.", tasks: ["Координація шкільного самоврядування", "Контроль етики та безпеки", "Управління ресурсами ліцею"] },
+            cult: { name: "Creative Studio", icon: ICONS.cult, desc: "Ти — генератор ідей. Твоя креативність перетворює звичайне шкільне життя на нескінченний фестиваль талантів.", tasks: ["Організація масштабних івентів", "Дизайн та арт-проєкти", "Розвиток творчих ком'юніті"] },
+            sport: { name: "Active Force", icon: ICONS.sport, desc: "Ти — джерело енергії. Твій драйв та прагнення до перемог надихають ліцеїстів на активний спосіб життя.", tasks: ["Спортивні ліги та турніри", "Челенджі здорового способу життя", "Організація активного відпочинку"] },
+            info: { name: "Media Pulse", icon: ICONS.info, desc: "Ти — медіа-експерт. Твоє вміння ловити хайп та поширювати важливе робить ліцей найпомітнішим у мережі.", tasks: ["Контент-мейкінг та SMM", "Шкільне радіо та подкасти", "Зв'язки з громадськістю"] }
         }
     };
 
-    // --- ЛОГІКА ДОДАТКА ---
-    let currentStep = 0;
-    let scores = { education: 0, discipline: 0, culture: 0, sport: 0, info: 0 };
+    let step = 0;
+    let scores = { edu: 0, disc: 0, cult: 0, sport: 0, info: 0 };
     const video = document.getElementById('introVideo');
 
-    function startVideo() {
-        document.getElementById('videoOverlay').classList.add('hidden');
+    function playIntro() {
+        document.getElementById('videoOverlay').style.display = 'none';
         video.play();
+        video.onended = toStart;
     }
 
-    video.onended = function() {
-        skipToStart();
-    };
-
-    function skipToStart() {
+    function toStart() {
         video.pause();
-        document.getElementById('videoSection').classList.add('hidden');
-        document.getElementById('startCard').classList.add('active');
+        document.getElementById('card-video').classList.remove('active');
+        document.getElementById('card-start').classList.add('active');
     }
 
     function startSurvey() {
-        document.getElementById('startCard').classList.remove('active');
-        document.getElementById('surveyCard').classList.add('active');
-        showQuestion();
+        document.getElementById('card-start').classList.remove('active');
+        document.getElementById('card-survey').classList.add('active');
+        renderQuestion();
     }
 
-    function showQuestion() {
-        const question = surveyData.questions[currentStep];
+    function renderQuestion() {
+        const qData = surveyData.questions[step];
         const total = surveyData.questions.length;
         
-        // Progress
-        document.getElementById('progressText').innerText = `Питання ${currentStep + 1} з ${total}`;
-        const percent = Math.round((currentStep / total) * 100);
-        document.getElementById('percentText').innerText = `${percent}%`;
-        document.getElementById('progressFill').style.width = `${percent}%`;
-
-        // Text
-        document.getElementById('questionText').innerText = question.q;
+        document.getElementById('u-bar').style.width = `${(step / total) * 100}%`;
+        document.getElementById('u-counter').innerText = `Question ${String(step + 1).padStart(2, '0')}`;
+        document.getElementById('u-question').innerText = qData.q;
         
-        // Options
-        const optionsList = document.getElementById('optionsList');
-        optionsList.innerHTML = '';
+        const optionsBox = document.getElementById('u-options');
+        optionsBox.innerHTML = '';
         
-        question.options.forEach(opt => {
+        qData.options.forEach(opt => {
             const btn = document.createElement('button');
-            btn.className = 'option-btn';
-            btn.innerHTML = `<span class="option-icon">${opt.i}</span> <span>${opt.t}</span>`;
-            btn.onclick = () => selectOption(opt.s);
-            optionsList.appendChild(btn);
+            btn.className = 'u-option-btn';
+            btn.innerHTML = `${opt.i} <span>${opt.t}</span>`;
+            btn.onclick = () => {
+                for (let s in opt.s) scores[s] += opt.s[s];
+                step++;
+                if (step < total) renderQuestion(); else showResult();
+            };
+            optionsBox.appendChild(btn);
         });
-    }
-
-    function selectOption(points) {
-        for (let m in points) {
-            scores[m] += points[m];
-        }
-
-        currentStep++;
-        if (currentStep < surveyData.questions.length) {
-            showQuestion();
-        } else {
-            showResult();
-        }
     }
 
     function showResult() {
-        document.getElementById('surveyCard').classList.remove('active');
-        document.getElementById('resultCard').classList.add('active');
+        document.getElementById('card-survey').classList.remove('active');
+        document.getElementById('card-result').classList.add('active');
 
-        // Логіка визначення переможця з урахуванням Tie-breaker
-        let maxScore = -1;
-        let winners = [];
+        let winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+        const min = surveyData.ministries[winner];
 
-        for (let m in scores) {
-            if (scores[m] > maxScore) {
-                maxScore = scores[m];
-                winners = [m];
-            } else if (scores[m] === maxScore) {
-                winners.push(m);
-            }
-        }
+        document.getElementById('res-icon-box').innerHTML = min.icon;
+        document.getElementById('res-name').innerText = min.name;
+        document.getElementById('res-desc').innerText = min.desc;
 
-        // Рандомний вибір, якщо є кілька лідерів
-        const resultKey = winners[Math.floor(Math.random() * winners.length)];
-        const ministry = surveyData.ministries[resultKey];
-
-        // Відображення
-        document.getElementById('resIcon').innerText = ministry.icon;
-        document.getElementById('resName').innerText = ministry.name;
-        document.getElementById('resDesc').innerText = ministry.desc;
-
-        const resTasks = document.getElementById('resTasks');
-        resTasks.innerHTML = '';
-        ministry.tasks.forEach(t => {
-            const li = document.createElement('li');
-            li.innerText = t;
-            resTasks.appendChild(li);
+        const taskBox = document.getElementById('res-tasks');
+        taskBox.innerHTML = '';
+        min.tasks.forEach(t => {
+            taskBox.innerHTML += `<div class="u-task-item">${ICONS.arrow} ${t}</div>`;
         });
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 </script>
 
