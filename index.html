@@ -2,15 +2,19 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Анкета для визначення міністерства учнівського самоврядування">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Анкета для визначення міністерства учнівського самоврядування ЗОШ №6 м. Чорноморськ">
     <meta name="theme-color" content="#2c5aa0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
     <title>Яке міністерство тобі підходить? | ЗОШ №6 м. Чорноморськ</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         :root {
@@ -26,16 +30,21 @@
             --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.2);
         }
 
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: var(--text-color);
             line-height: 1.6;
             min-height: 100vh;
-            padding: 0;
-            margin: 0;
+            min-height: -webkit-fill-available;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
         }
 
         .container {
@@ -78,6 +87,167 @@
             line-height: 1.5;
         }
 
+        /* ===== VIDEO INTRO SECTION ===== */
+        .video-intro {
+            position: relative;
+            width: 100%;
+            background: #000;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-hover);
+            margin-bottom: 20px;
+            aspect-ratio: 9 / 16;
+            max-height: 70vh;
+        }
+
+        .video-intro video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            transition: opacity 0.4s ease;
+        }
+
+        .video-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+        }
+
+        .play-button::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 22px solid var(--primary-color);
+            border-top: 14px solid transparent;
+            border-bottom: 14px solid transparent;
+            margin-left: 6px;
+        }
+
+        .video-overlay h2 {
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-overlay p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 15px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-intro:hover .video-controls,
+        .video-intro.show-controls .video-controls {
+            opacity: 1;
+        }
+
+        .skip-btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-color);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .skip-btn:hover {
+            background: white;
+            transform: scale(1.05);
+        }
+
+        .video-loading {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #1a1a2e;
+            color: white;
+            gap: 15px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-top-color: var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .video-error {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #1a1a2e;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            gap: 15px;
+        }
+
+        .video-error-icon {
+            font-size: 3rem;
+        }
+
+        /* ===== MAIN CARDS ===== */
         .card {
             background: var(--white);
             border-radius: var(--border-radius);
@@ -85,11 +255,6 @@
             box-shadow: var(--shadow);
             margin-bottom: 20px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
         }
 
         .question {
@@ -119,18 +284,14 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            font-family: inherit;
+            color: inherit;
         }
 
         .option:hover {
             background: #e8f4f8;
             border-color: var(--secondary-color);
             transform: translateX(5px);
-        }
-
-        .option.selected {
-            background: var(--primary-color);
-            color: var(--white);
-            border-color: var(--primary-color);
         }
 
         .option-icon {
@@ -152,6 +313,7 @@
             margin-top: 20px;
             transition: all 0.3s ease;
             box-shadow: var(--shadow);
+            font-family: inherit;
         }
 
         .btn:hover {
@@ -206,13 +368,6 @@
             font-weight: 700;
         }
 
-        .result-description {
-            color: #666;
-            font-size: 1rem;
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-
         .ministry-card {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: var(--white);
@@ -226,6 +381,11 @@
             font-size: clamp(1.3rem, 4vw, 1.6rem);
             font-weight: 700;
             margin-bottom: 15px;
+        }
+
+        .ministry-description {
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
 
         .ministry-tasks {
@@ -291,7 +451,7 @@
         }
 
         .hidden {
-            display: none;
+            display: none !important;
         }
 
         .fade-in {
@@ -341,6 +501,16 @@
                 padding: 14px 24px;
                 font-size: 1rem;
             }
+
+            .video-intro {
+                max-height: 60vh;
+            }
+        }
+
+        @media screen and (max-height: 600px) {
+            .video-intro {
+                max-height: 50vh;
+            }
         }
 
         /* High contrast mode support */
@@ -362,6 +532,27 @@
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-color: #e0e0e0;
+                --bg-color: #2a2a3e;
+                --white: #1e1e2e;
+            }
+
+            .option {
+                background: #2a2a3e;
+                border-color: #3a3a4e;
+                color: #e0e0e0;
+            }
+
+            .privacy-notice {
+                background: #2a2a3e;
+                border-color: #3a3a4e;
+                color: #b0b0b0;
             }
         }
 
@@ -424,6 +615,26 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+
+        /* Video caption for accessibility */
+        .video-caption {
+            position: absolute;
+            bottom: 60px;
+            left: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-intro.show-caption .video-caption {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -432,13 +643,59 @@
             <img src="https://i0.wp.com/ilschool6.com/wp-content/uploads/2017/05/school.png" 
                  alt="Логотип ЗОШ №6 м. Чорноморськ" 
                  class="school-logo"
-                 loading="lazy">
+                 loading="eager"
+                 width="120"
+                 height="120">
             <h1>Учнівське самоврядування<br>ЗОШ №6 м. Чорноморськ</h1>
             <p class="subtitle">Дізнайся, яке міністерство тобі підходить!</p>
         </header>
 
-        <!-- Start Screen -->
-        <div id="startScreen" class="card start-screen fade-in">
+        <!-- VIDEO INTRO -->
+        <div id="videoIntro" class="video-intro" role="region" aria-label="Вступне відео про учнівське самоврядування">
+            <div class="video-loading" id="videoLoading">
+                <div class="spinner"></div>
+                <p>Завантаження відео...</p>
+            </div>
+
+            <video id="introVideo" 
+                   preload="metadata"
+                   playsinline
+                   webkit-playsinline
+                   x5-playsinline
+                   muted
+                   loop
+                   controls
+                   aria-label="Анімаційне відео з котом-маскотом про ідеї, голос та зміни в учнівському самоврядуванні"
+                   poster="https://i0.wp.com/ilschool6.com/wp-content/uploads/2017/05/school.png">
+                <source src="./video.mp4" type="video/mp4">
+                <source src="./video.webm" type="video/webm">
+                <p>Ваш браузер не підтримує відео. <a href="./video.mp4" download>Завантажити відео</a></p>
+            </video>
+
+            <div class="video-overlay" id="videoOverlay">
+                <button class="play-button" id="playButton" aria-label="Відтворити вступне відео"></button>
+                <h2>🐱 Привіт! Я — твій гід</h2>
+                <p>Дізнайся, як твій голос може змінити школу</p>
+            </div>
+
+            <div class="video-caption" id="videoCaption" role="status" aria-live="polite">
+                Кіт-маскот запрошує пройти анкету для визначення міністерства учнівського самоврядування
+            </div>
+
+            <div class="video-controls" id="videoControls">
+                <button class="skip-btn" id="skipBtn" aria-label="Пропустити відео">Пропустити ▶</button>
+            </div>
+
+            <div class="video-error hidden" id="videoError">
+                <div class="video-error-icon"></div>
+                <h3>Відео недоступне</h3>
+                <p>Не хвилюйся! Ти все одно можеш пройти анкету та дізнатися, яке міністерство тобі підходить.</p>
+                <button class="skip-btn" onclick="skipVideo()">Перейти до анкети</button>
+            </div>
+        </div>
+
+        <!-- Start Screen (shown after video or if skipped) -->
+        <div id="startScreen" class="card start-screen hidden fade-in">
             <h2 style="color: var(--primary-color); margin-bottom: 15px;">Ласкаво просимо!</h2>
             <p>Ця анкета допоможе тобі визначити, в якому міністерстві учнівського самоврядування ти міг би реалізувати свій потенціал.</p>
             
@@ -448,7 +705,7 @@
                     <span>5 хвилин часу</span>
                 </div>
                 <div class="feature">
-                    <span class="feature-icon"></span>
+                    <span class="feature-icon">🔒</span>
                     <span>Повна анонімність</span>
                 </div>
                 <div class="feature">
@@ -469,8 +726,8 @@
             <button class="btn" onclick="startSurvey()">Почати тестування</button>
 
             <div class="privacy-notice">
-                <h4>🔒 Захист персональних даних</h4>
-                <p>Анкета є повністю анонімною. Ми не збираємо персональні дані. Відповіді використовуються виключно для надання рекомендації. Обробка даних здійснюється відповідно до Закону України "Про захист персональних даних" та Загального регламенту із захисту даних (GDPR).</p>
+                <h4> Захист персональних даних</h4>
+                <p>Анкета є повністю анонімною. Ми не збираємо персональні дані. Відповіді використовуються виключно для надання рекомендації. Обробка даних здійснюється відповідно до Закону України "Про захист персональних даних" №2297-VI та Загального регламенту із захисту даних (GDPR).</p>
             </div>
         </div>
 
@@ -495,7 +752,7 @@
             
             <div class="ministry-card" id="ministryCard">
                 <div class="ministry-name" id="ministryName"></div>
-                <p id="ministryDescription"></p>
+                <p class="ministry-description" id="ministryDescription"></p>
                 
                 <div class="ministry-tasks">
                     <h3>Що ти робитимеш:</h3>
@@ -519,7 +776,137 @@
     </div>
 
     <script>
-        // Survey Data with Branching Logic
+        // ===== VIDEO MANAGEMENT =====
+        const video = document.getElementById('introVideo');
+        const overlay = document.getElementById('videoOverlay');
+        const playButton = document.getElementById('playButton');
+        const skipBtn = document.getElementById('skipBtn');
+        const videoLoading = document.getElementById('videoLoading');
+        const videoError = document.getElementById('videoError');
+        const videoIntro = document.getElementById('videoIntro');
+        const startScreen = document.getElementById('startScreen');
+
+        let videoStarted = false;
+        let videoEnded = false;
+
+        // Detect mobile for better UX
+        const isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+                         || ('ontouchstart' in window);
+
+        // Show controls on tap for mobile
+        if (isMobile) {
+            videoIntro.addEventListener('click', () => {
+                videoIntro.classList.toggle('show-controls');
+            });
+        }
+
+        // Handle video loading
+        video.addEventListener('loadeddata', () => {
+            videoLoading.classList.add('hidden');
+        });
+
+        video.addEventListener('canplay', () => {
+            videoLoading.classList.add('hidden');
+        });
+
+        // Handle video errors gracefully
+        video.addEventListener('error', () => {
+            videoLoading.classList.add('hidden');
+            videoError.classList.remove('hidden');
+            overlay.classList.add('hidden');
+            console.warn('Відео не вдалося завантажити, показуємо fallback');
+        });
+
+        // Timeout fallback — if video doesn't load in 8 seconds
+        const videoTimeout = setTimeout(() => {
+            if (!videoStarted && video.readyState < 2) {
+                videoLoading.classList.add('hidden');
+                videoError.classList.remove('hidden');
+                overlay.classList.add('hidden');
+            }
+        }, 8000);
+
+        // Play button handler
+        playButton.addEventListener('click', async () => {
+            clearTimeout(videoTimeout);
+            try {
+                // Unmute on user interaction (required by browsers)
+                video.muted = false;
+                video.volume = 0.7;
+                await video.play();
+                overlay.classList.add('hidden');
+                videoStarted = true;
+                videoIntro.classList.add('show-controls');
+                
+                // Show caption for accessibility
+                setTimeout(() => {
+                    videoIntro.classList.add('show-caption');
+                    setTimeout(() => {
+                        videoIntro.classList.remove('show-caption');
+                    }, 5000);
+                }, 1000);
+            } catch (err) {
+                console.warn('Autoplay blocked:', err);
+                // Fallback: show video muted
+                video.muted = true;
+                try {
+                    await video.play();
+                    overlay.classList.add('hidden');
+                    videoStarted = true;
+                } catch (e) {
+                    videoError.classList.remove('hidden');
+                    overlay.classList.add('hidden');
+                }
+            }
+        });
+
+        // Skip button
+        skipBtn.addEventListener('click', skipVideo);
+
+        function skipVideo() {
+            clearTimeout(videoTimeout);
+            video.pause();
+            videoIntro.classList.add('hidden');
+            startScreen.classList.remove('hidden');
+        }
+
+        // When video ends, show start screen
+        video.addEventListener('ended', () => {
+            videoEnded = true;
+            setTimeout(() => {
+                videoIntro.classList.add('hidden');
+                startScreen.classList.remove('hidden');
+            }, 500);
+        });
+
+        // Auto-try muted autoplay (works on most mobile browsers)
+        window.addEventListener('load', () => {
+            if (video.readyState >= 2) {
+                videoLoading.classList.add('hidden');
+            }
+            // Try muted autoplay
+            video.muted = true;
+            video.play().then(() => {
+                clearTimeout(videoTimeout);
+                overlay.classList.add('hidden');
+                videoStarted = true;
+                videoIntro.classList.add('show-controls');
+            }).catch(() => {
+                // Autoplay blocked — keep overlay visible
+                console.log('Autoplay blocked, waiting for user interaction');
+            });
+        });
+
+        // Pause video when tab is hidden (save battery)
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden && !video.paused) {
+                video.pause();
+            } else if (!document.hidden && videoStarted && !videoEnded) {
+                video.play().catch(() => {});
+            }
+        });
+
+        // ===== SURVEY DATA (based on Положення про кабінет міністрів) =====
         const surveyData = {
             questions: [
                 {
@@ -527,36 +914,11 @@
                     text: "Що тобі найбільше подобається робити у вільний час?",
                     type: "single",
                     options: [
-                        { 
-                            text: "Читати книги, вивчати нове, розв'язувати задачі", 
-                            icon: "📚",
-                            next: 2,
-                            score: { education: 3 }
-                        },
-                        { 
-                            text: "Займатися спортом, бути активним", 
-                            icon: "⚽",
-                            next: 2,
-                            score: { sport: 3 }
-                        },
-                        { 
-                            text: "Малювати, співати, танцювати, творити", 
-                            icon: "🎨",
-                            next: 2,
-                            score: { culture: 3 }
-                        },
-                        { 
-                            text: "Допомагати іншим, наводити порядок", 
-                            icon: "",
-                            next: 2,
-                            score: { discipline: 3 }
-                        },
-                        { 
-                            text: "Спілкуватися, ділитися новинами", 
-                            icon: "📱",
-                            next: 2,
-                            score: { info: 3 }
-                        }
+                        { text: "Читати книги, вивчати нове, розв'язувати задачі", icon: "📚", next: 2, score: { education: 3 } },
+                        { text: "Займатися спортом, бути активним", icon: "⚽", next: 2, score: { sport: 3 } },
+                        { text: "Малювати, співати, танцювати, творити", icon: "🎨", next: 2, score: { culture: 3 } },
+                        { text: "Допомагати іншим, наводити порядок", icon: "🛡️", next: 2, score: { discipline: 3 } },
+                        { text: "Спілкуватися, ділитися новинами", icon: "", next: 2, score: { info: 3 } }
                     ]
                 },
                 {
@@ -564,36 +926,11 @@
                     text: "Яка діяльність у школі тобі найбільш цікава?",
                     type: "single",
                     options: [
-                        { 
-                            text: "Олімпіади, конкурси, наукові проєкти", 
-                            icon: "🏅",
-                            next: 3,
-                            score: { education: 2 }
-                        },
-                        { 
-                            text: "Спортивні змагання, турніри", 
-                            icon: "🏆",
-                            next: 3,
-                            score: { sport: 2 }
-                        },
-                        { 
-                            text: "Концерти, свята, вистави", 
-                            icon: "🎭",
-                            next: 3,
-                            score: { culture: 2 }
-                        },
-                        { 
-                            text: "Чергування, допомога в організації порядку", 
-                            icon: "📋",
-                            next: 3,
-                            score: { discipline: 2 }
-                        },
-                        { 
-                            text: "Створення шкільних новин, фото/відео", 
-                            icon: "📸",
-                            next: 3,
-                            score: { info: 2 }
-                        }
+                        { text: "Олімпіади, конкурси, наукові проєкти", icon: "🏅", next: 3, score: { education: 2 } },
+                        { text: "Спортивні змагання, турніри", icon: "🏆", next: 3, score: { sport: 2 } },
+                        { text: "Концерти, свята, вистави", icon: "🎭", next: 3, score: { culture: 2 } },
+                        { text: "Чергування, допомога в організації порядку", icon: "📋", next: 3, score: { discipline: 2 } },
+                        { text: "Створення шкільних новин, фото/відео", icon: "📸", next: 3, score: { info: 2 } }
                     ]
                 },
                 {
@@ -601,36 +938,11 @@
                     text: "Які якості ти цінуєш у собі найбільше?",
                     type: "single",
                     options: [
-                        { 
-                            text: "Розум, допитливість, аналітичне мислення", 
-                            icon: "🧠",
-                            next: 4,
-                            score: { education: 2 }
-                        },
-                        { 
-                            text: "Витривалість, сила, спритність", 
-                            icon: "💪",
-                            next: 4,
-                            score: { sport: 2 }
-                        },
-                        { 
-                            text: "Креативність, уява, артистизм", 
-                            icon: "✨",
-                            next: 4,
-                            score: { culture: 2 }
-                        },
-                        { 
-                            text: "Відповідальність, організованість", 
-                            icon: "✅",
-                            next: 4,
-                            score: { discipline: 2 }
-                        },
-                        { 
-                            text: "Комунікабельність, відкритість", 
-                            icon: "💬",
-                            next: 4,
-                            score: { info: 2 }
-                        }
+                        { text: "Розум, допитливість, аналітичне мислення", icon: "🧠", next: 4, score: { education: 2 } },
+                        { text: "Витривалість, сила, спритність", icon: "💪", next: 4, score: { sport: 2 } },
+                        { text: "Креативність, уява, артистизм", icon: "✨", next: 4, score: { culture: 2 } },
+                        { text: "Відповідальність, організованість", icon: "✅", next: 4, score: { discipline: 2 } },
+                        { text: "Комунікабельність, відкритість", icon: "💬", next: 4, score: { info: 2 } }
                     ]
                 },
                 {
@@ -638,36 +950,11 @@
                     text: "Що для тебе найважливіше у шкільному житті?",
                     type: "single",
                     options: [
-                        { 
-                            text: "Отримувати глибокі знання та розвиватися", 
-                            icon: "",
-                            next: 5,
-                            score: { education: 2 }
-                        },
-                        { 
-                            text: "Бути здоровим та фізично розвиненим", 
-                            icon: "",
-                            next: 5,
-                            score: { sport: 2 }
-                        },
-                        { 
-                            text: "Творча самореалізація та яскраві події", 
-                            icon: "🎉",
-                            next: 5,
-                            score: { culture: 2 }
-                        },
-                        { 
-                            text: "Дисципліна, порядок, справедливість", 
-                            icon: "⚖️",
-                            next: 5,
-                            score: { discipline: 2 }
-                        },
-                        { 
-                            text: "Інформаційна відкритість та прозорість", 
-                            icon: "📢",
-                            next: 5,
-                            score: { info: 2 }
-                        }
+                        { text: "Отримувати глибокі знання та розвиватися", icon: "🎓", next: 5, score: { education: 2 } },
+                        { text: "Бути здоровим та фізично розвиненим", icon: "❤️", next: 5, score: { sport: 2 } },
+                        { text: "Творча самореалізація та яскраві події", icon: "🎉", next: 5, score: { culture: 2 } },
+                        { text: "Дисципліна, порядок, справедливість", icon: "⚖️", next: 5, score: { discipline: 2 } },
+                        { text: "Інформаційна відкритість та прозорість", icon: "📢", next: 5, score: { info: 2 } }
                     ]
                 },
                 {
@@ -675,36 +962,11 @@
                     text: "Як ти уявляєш свій внесок у розвиток школи?",
                     type: "single",
                     options: [
-                        { 
-                            text: "Допомагати учням краще навчатися", 
-                            icon: "",
-                            next: "result",
-                            score: { education: 2 }
-                        },
-                        { 
-                            text: "Організовувати спортивні заходи", 
-                            icon: "⚽",
-                            next: "result",
-                            score: { sport: 2 }
-                        },
-                        { 
-                            text: "Створювати святкову атмосферу", 
-                            icon: "🎨",
-                            next: "result",
-                            score: { culture: 2 }
-                        },
-                        { 
-                            text: "Підтримувати порядок та дисципліну", 
-                            icon: "️",
-                            next: "result",
-                            score: { discipline: 2 }
-                        },
-                        { 
-                            text: "Інформувати про шкільне життя", 
-                            icon: "📰",
-                            next: "result",
-                            score: { info: 2 }
-                        }
+                        { text: "Допомагати учням краще навчатися", icon: "", next: "result", score: { education: 2 } },
+                        { text: "Організовувати спортивні заходи", icon: "⚽", next: "result", score: { sport: 2 } },
+                        { text: "Створювати святкову атмосферу", icon: "🎨", next: "result", score: { culture: 2 } },
+                        { text: "Підтримувати порядок та дисципліну", icon: "🛡️", next: "result", score: { discipline: 2 } },
+                        { text: "Інформувати про шкільне життя", icon: "📰", next: "result", score: { info: 2 } }
                     ]
                 }
             ],
@@ -750,7 +1012,7 @@
                 },
                 sport: {
                     name: "Міністерство спорту і охорони здоров'я",
-                    icon: "",
+                    icon: "⚽",
                     description: "Ти активний та енергійний! Пропаганда здорового способу життя – твоє покликання.",
                     tasks: [
                         "Організовувати спортивні турніри та акції",
@@ -777,18 +1039,11 @@
             }
         };
 
-        // State
+        // ===== SURVEY STATE =====
         let currentQuestion = 0;
-        let scores = {
-            education: 0,
-            discipline: 0,
-            culture: 0,
-            sport: 0,
-            info: 0
-        };
+        let scores = { education: 0, discipline: 0, culture: 0, sport: 0, info: 0 };
         let userAnswers = [];
 
-        // Initialize
         function init() {
             createStepIndicator();
         }
@@ -807,13 +1062,9 @@
         function updateStepIndicator() {
             for (let i = 0; i < surveyData.questions.length; i++) {
                 const step = document.getElementById(`step-${i}`);
-                if (i < currentQuestion) {
-                    step.className = 'step completed';
-                } else if (i === currentQuestion) {
-                    step.className = 'step active';
-                } else {
-                    step.className = 'step';
-                }
+                if (i < currentQuestion) step.className = 'step completed';
+                else if (i === currentQuestion) step.className = 'step active';
+                else step.className = 'step';
             }
         }
 
@@ -835,42 +1086,34 @@
             const question = surveyData.questions[currentQuestion];
             const container = document.getElementById('questionContainer');
             
-            // Fade out
             container.classList.remove('fade-in');
-            void container.offsetWidth; // Trigger reflow
+            void container.offsetWidth;
             
             document.getElementById('questionText').textContent = `${currentQuestion + 1}. ${question.text}`;
             
             const optionsContainer = document.getElementById('optionsContainer');
             optionsContainer.innerHTML = '';
             
-            question.options.forEach((option, index) => {
+            question.options.forEach((option) => {
                 const btn = document.createElement('button');
                 btn.className = 'option';
-                btn.innerHTML = `
-                    <span class="option-icon">${option.icon}</span>
-                    <span>${option.text}</span>
-                `;
+                btn.innerHTML = `<span class="option-icon">${option.icon}</span><span>${option.text}</span>`;
                 btn.onclick = () => selectOption(option);
                 btn.setAttribute('aria-label', option.text);
                 optionsContainer.appendChild(btn);
             });
             
-            // Fade in
             container.classList.add('fade-in');
             updateStepIndicator();
             updateProgressBar();
         }
 
         function selectOption(option) {
-            // Update scores
             for (let key in option.score) {
                 scores[key] += option.score[key];
             }
-            
             userAnswers.push(option);
             
-            // Navigate
             if (option.next === 'result') {
                 showResult();
             } else {
@@ -884,7 +1127,6 @@
             document.getElementById('resultScreen').classList.remove('hidden');
             document.getElementById('resultScreen').classList.add('fade-in');
             
-            // Find ministry with highest score
             let maxScore = 0;
             let bestMinistry = 'education';
             
@@ -909,7 +1151,6 @@
                 tasksList.appendChild(li);
             });
             
-            // Update progress bar to 100%
             document.getElementById('progressBar').style.width = '100%';
             updateStepIndicator();
         }
@@ -928,21 +1169,7 @@
             document.getElementById('progressBar').style.width = '0%';
         }
 
-        // Initialize on load
         window.onload = init;
-
-        // Service Worker for offline support (optional enhancement)
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('data:text/javascript,' + encodeURIComponent(`
-                self.addEventListener('fetch', event => {
-                    event.respondWith(fetch(event.request).catch(() => {
-                        return new Response('Offline mode');
-                    }));
-                });
-            `)).catch(() => {
-                // Silent fail - not critical
-            });
-        }
     </script>
 </body>
 </html>
