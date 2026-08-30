@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <meta name="description" content="Анкета для визначення міністерства учнівського самоврядування ЗОШ №6 м. Чорноморськ">
+    <meta name="description" content="Оновлена анкета учнівського самоврядування Чорноморського ліцею №6">
     <meta name="theme-color" content="#2c5aa0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="format-detection" content="telephone=no">
-    <title>Яке міністерство тобі підходить? | ЗОШ №6 м. Чорноморськ</title>
+    <title>Твоє міністерство | Чорноморський ліцей №6</title>
     <style>
         * {
             margin: 0;
@@ -25,86 +22,77 @@
             --bg-color: #f5f7fa;
             --white: #ffffff;
             --success: #7ed321;
-            --border-radius: 12px;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
+            --border-radius: 16px;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.15);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: var(--text-color);
             line-height: 1.6;
             min-height: 100vh;
-            min-height: -webkit-fill-available;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+            display: flex;
+            justify-content: center;
+            padding: 20px;
         }
 
         .container {
+            width: 100%;
             max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
+            gap: 20px;
         }
 
+        /* HEADER */
         .header {
             background: var(--white);
             border-radius: var(--border-radius);
-            padding: 20px;
+            padding: 25px;
             text-align: center;
             box-shadow: var(--shadow);
-            margin-bottom: 20px;
         }
 
         .school-logo {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             object-fit: contain;
             margin-bottom: 15px;
             border-radius: 50%;
             border: 4px solid var(--primary-color);
+            background: white;
         }
 
         h1 {
             color: var(--primary-color);
-            font-size: clamp(1.3rem, 4vw, 1.8rem);
-            margin-bottom: 10px;
-            font-weight: 700;
+            font-size: clamp(1.2rem, 5vw, 1.6rem);
+            margin-bottom: 8px;
+            line-height: 1.2;
         }
 
         .subtitle {
             color: #666;
-            font-size: 0.95rem;
-            line-height: 1.5;
+            font-size: 0.9rem;
         }
 
-        /* ===== VIDEO INTRO SECTION ===== */
+        /* VIDEO SECTION */
         .video-intro {
             position: relative;
             width: 100%;
             background: #000;
             border-radius: var(--border-radius);
             overflow: hidden;
-            box-shadow: var(--shadow-hover);
-            margin-bottom: 20px;
+            box-shadow: var(--shadow);
             aspect-ratio: 9 / 16;
-            max-height: 70vh;
+            max-height: 65vh;
         }
 
-        .video-intro video {
+        video {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
         }
 
         .video-overlay {
@@ -118,1058 +106,537 @@
             color: white;
             text-align: center;
             padding: 20px;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.5s;
         }
 
-        .video-overlay.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
+        .video-overlay.hidden { opacity: 0; pointer-events: none; }
 
         .play-button {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--white);
             border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .play-button:hover {
-            transform: scale(1.1);
+            margin-bottom: 15px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.4);
         }
 
         .play-button::before {
             content: '';
-            width: 0;
-            height: 0;
-            border-left: 22px solid var(--primary-color);
-            border-top: 14px solid transparent;
-            border-bottom: 14px solid transparent;
-            margin-left: 6px;
-        }
-
-        .video-overlay h2 {
-            font-size: clamp(1.2rem, 4vw, 1.5rem);
-            margin-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .video-overlay p {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            border-left: 20px solid var(--primary-color);
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 5px;
         }
 
         .video-controls {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 15px;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .video-intro:hover .video-controls,
-        .video-intro.show-controls .video-controls {
-            opacity: 1;
+            bottom: 20px;
+            right: 20px;
         }
 
         .skip-btn {
             background: rgba(255, 255, 255, 0.9);
-            color: var(--text-color);
             border: none;
-            padding: 10px 18px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
         }
 
-        .skip-btn:hover {
-            background: white;
-            transform: scale(1.05);
-        }
-
-        .video-loading {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: #1a1a2e;
-            color: white;
-            gap: 15px;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255, 255, 255, 0.2);
-            border-top-color: var(--accent-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .video-error {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: #1a1a2e;
-            color: white;
-            padding: 30px;
-            text-align: center;
-            gap: 15px;
-        }
-
-        .video-error-icon {
-            font-size: 3rem;
-        }
-
-        /* ===== MAIN CARDS ===== */
+        /* CARDS & SURVEY */
         .card {
             background: var(--white);
             border-radius: var(--border-radius);
             padding: 25px;
             box-shadow: var(--shadow);
-            margin-bottom: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: none;
         }
 
-        .question {
-            font-size: clamp(1.1rem, 3.5vw, 1.3rem);
-            font-weight: 600;
+        .card.active { display: block; animation: slideUp 0.4s ease-out; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 700;
             color: var(--primary-color);
             margin-bottom: 20px;
-            line-height: 1.4;
         }
 
-        .options {
+        .options-list {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
-        .option {
+        .option-btn {
             background: var(--bg-color);
-            border: 2px solid #e1e8ed;
-            border-radius: 10px;
+            border: 2px solid #edf2f7;
             padding: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
+            border-radius: 12px;
             text-align: left;
-            width: 100%;
+            cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-family: inherit;
-            color: inherit;
+            gap: 15px;
+            transition: all 0.2s;
+            font-size: 1rem;
+            width: 100%;
         }
 
-        .option:hover {
-            background: #e8f4f8;
+        .option-btn:hover {
             border-color: var(--secondary-color);
+            background: #eef6ff;
             transform: translateX(5px);
         }
 
-        .option-icon {
-            font-size: 1.5rem;
-            width: 30px;
-            text-align: center;
-        }
+        .option-icon { font-size: 1.5rem; min-width: 30px; text-align: center; }
 
-        .btn {
-            background: var(--primary-color);
-            color: var(--white);
-            border: none;
-            padding: 16px 32px;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow);
-            font-family: inherit;
-        }
-
-        .btn:hover {
-            background: var(--secondary-color);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .btn-secondary {
-            background: var(--bg-color);
-            color: var(--text-color);
-            margin-top: 10px;
-        }
-
-        .btn-secondary:hover {
-            background: #e1e8ed;
+        /* PROGRESS */
+        .progress-container {
+            margin-bottom: 10px;
         }
 
         .progress-bar {
-            background: var(--bg-color);
             height: 8px;
+            background: rgba(255,255,255,0.3);
             border-radius: 4px;
-            margin-bottom: 20px;
             overflow: hidden;
         }
 
-        .progress {
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        .progress-fill {
             height: 100%;
+            background: var(--accent-color);
+            width: 0%;
             transition: width 0.3s ease;
-            border-radius: 4px;
         }
 
-        .result {
+        /* RESULT SCREEN */
+        .result-card {
             text-align: center;
-            display: none;
         }
 
-        .result-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
-
-        .result-title {
-            color: var(--primary-color);
-            font-size: clamp(1.4rem, 5vw, 1.8rem);
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .ministry-card {
+        .ministry-badge {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--white);
-            padding: 25px;
+            color: white;
+            padding: 30px 20px;
             border-radius: var(--border-radius);
             margin: 20px 0;
-            box-shadow: var(--shadow-hover);
         }
 
-        .ministry-name {
-            font-size: clamp(1.3rem, 4vw, 1.6rem);
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
+        .ministry-icon { font-size: 4rem; margin-bottom: 10px; }
+        .ministry-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; }
 
-        .ministry-description {
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        .ministry-tasks {
+        .tasks-list {
             text-align: left;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
             margin-top: 15px;
         }
 
-        .ministry-tasks h3 {
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-
-        .ministry-tasks ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .ministry-tasks li {
-            padding: 8px 0;
-            padding-left: 25px;
+        .tasks-list h3 { font-size: 1rem; margin-bottom: 10px; color: var(--primary-color); }
+        .tasks-list ul { list-style: none; }
+        .tasks-list li {
             position: relative;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .ministry-tasks li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--accent-color);
-            font-weight: bold;
-        }
-
-        .info-box {
-            background: #e8f4f8;
-            border-left: 4px solid var(--secondary-color);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
+            padding-left: 25px;
+            margin-bottom: 8px;
             font-size: 0.9rem;
         }
 
-        .info-box strong {
-            color: var(--primary-color);
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .privacy-notice {
-            background: var(--bg-color);
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            color: #666;
-            margin-top: 20px;
-            border: 1px solid #dce4eb;
-        }
-
-        .privacy-notice h4 {
-            color: var(--primary-color);
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Accessibility */
-        .sr-only {
+        .tasks-list li::before {
+            content: '✓';
             position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border-width: 0;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
         }
 
-        button:focus,
-        .option:focus {
-            outline: 3px solid var(--accent-color);
-            outline-offset: 2px;
-        }
-
-        /* Mobile optimizations */
-        @media screen and (max-width: 480px) {
-            .container {
-                padding: 10px;
-            }
-
-            .card {
-                padding: 20px 15px;
-            }
-
-            .option {
-                padding: 14px 12px;
-                font-size: 0.95rem;
-            }
-
-            .btn {
-                padding: 14px 24px;
-                font-size: 1rem;
-            }
-
-            .video-intro {
-                max-height: 60vh;
-            }
-        }
-
-        @media screen and (max-height: 600px) {
-            .video-intro {
-                max-height: 50vh;
-            }
-        }
-
-        /* High contrast mode support */
-        @media (prefers-contrast: high) {
-            :root {
-                --primary-color: #1a3a6f;
-                --text-color: #000;
-                --bg-color: #fff;
-            }
-
-            .option {
-                border-width: 3px;
-            }
-        }
-
-        /* Reduced motion support */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* Dark mode support */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --text-color: #e0e0e0;
-                --bg-color: #2a2a3e;
-                --white: #1e1e2e;
-            }
-
-            .option {
-                background: #2a2a3e;
-                border-color: #3a3a4e;
-                color: #e0e0e0;
-            }
-
-            .privacy-notice {
-                background: #2a2a3e;
-                border-color: #3a3a4e;
-                color: #b0b0b0;
-            }
-        }
-
-        .step-indicator {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-
-        .step {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #ddd;
-            transition: background 0.3s ease;
-        }
-
-        .step.active {
+        .btn-action {
             background: var(--primary-color);
-        }
-
-        .step.completed {
-            background: var(--success);
-        }
-
-        .start-screen {
-            text-align: center;
-        }
-
-        .start-screen p {
-            margin: 15px 0;
-            font-size: 1rem;
-            color: #555;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin: 20px 0;
-            text-align: left;
-        }
-
-        .feature {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px;
-            background: var(--bg-color);
-            border-radius: 8px;
-        }
-
-        .feature-icon {
-            font-size: 1.5rem;
-        }
-
-        @media (min-width: 480px) {
-            .features {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* Video caption for accessibility */
-        .video-caption {
-            position: absolute;
-            bottom: 60px;
-            left: 15px;
-            right: 15px;
-            background: rgba(0, 0, 0, 0.7);
             color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 15px;
+            cursor: pointer;
+            font-size: 1rem;
         }
 
-        .video-intro.show-caption .video-caption {
-            opacity: 1;
+        .hidden { display: none !important; }
+
+        @media (max-width: 480px) {
+            .container { padding: 10px; }
+            .card { padding: 20px 15px; }
+            .video-intro { max-height: 55vh; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <img src="https://i0.wp.com/ilschool6.com/wp-content/uploads/2017/05/school.png" 
-                 alt="Логотип ЗОШ №6 м. Чорноморськ" 
-                 class="school-logo"
-                 loading="eager"
-                 width="120"
-                 height="120">
-            <h1>Учнівське самоврядування<br>ЗОШ №6 м. Чорноморськ</h1>
-            <p class="subtitle">Дізнайся, яке міністерство тобі підходить!</p>
-        </header>
 
-        <!-- VIDEO INTRO -->
-        <div id="videoIntro" class="video-intro" role="region" aria-label="Вступне відео про учнівське самоврядування">
-            <div class="video-loading" id="videoLoading">
-                <div class="spinner"></div>
-                <p>Завантаження відео...</p>
-            </div>
+<div class="container">
+    <header class="header">
+        <img src="https://i0.wp.com/ilschool6.com/wp-content/uploads/2017/05/school.png" alt="Logo" class="school-logo">
+        <h1>Самоврядування Чорноморського ліцею №6</h1>
+        <p class="subtitle">Пройди тест та знайди своє місце в команді!</p>
+    </header>
 
-            <video id="introVideo" 
-                   preload="metadata"
-                   playsinline
-                   webkit-playsinline
-                   x5-playsinline
-                   muted
-                   loop
-                   controls
-                   aria-label="Анімаційне відео з котом-маскотом про ідеї, голос та зміни в учнівському самоврядуванні"
-                   poster="https://i0.wp.com/ilschool6.com/wp-content/uploads/2017/05/school.png">
-                <source src="./video.mp4" type="video/mp4">
-                <source src="./video.webm" type="video/webm">
-                <p>Ваш браузер не підтримує відео. <a href="./video.mp4" download>Завантажити відео</a></p>
-            </video>
-
-            <div class="video-overlay" id="videoOverlay">
-                <button class="play-button" id="playButton" aria-label="Відтворити вступне відео"></button>
-                <h2>🐱 Привіт! Я — твій гід</h2>
-                <p>Дізнайся, як твій голос може змінити школу</p>
-            </div>
-
-            <div class="video-caption" id="videoCaption" role="status" aria-live="polite">
-                Кіт-маскот запрошує пройти анкету для визначення міністерства учнівського самоврядування
-            </div>
-
-            <div class="video-controls" id="videoControls">
-                <button class="skip-btn" id="skipBtn" aria-label="Пропустити відео">Пропустити ▶</button>
-            </div>
-
-            <div class="video-error hidden" id="videoError">
-                <div class="video-error-icon"></div>
-                <h3>Відео недоступне</h3>
-                <p>Не хвилюйся! Ти все одно можеш пройти анкету та дізнатися, яке міністерство тобі підходить.</p>
-                <button class="skip-btn" onclick="skipVideo()">Перейти до анкети</button>
-            </div>
+    <!-- VIDEO INTRO -->
+    <div id="videoSection" class="video-intro">
+        <video id="introVideo" playsinline poster="https://i0.wp.com/ilschool6.com/wp-content/uploads/2017/05/school.png">
+            <source src="video.mp4" type="video/mp4">
+        </video>
+        <div id="videoOverlay" class="video-overlay">
+            <button class="play-button" id="playBtn" onclick="startVideo()"></button>
+            <h2>Привіт! Я — твій гід</h2>
+            <p>Дізнайся, як ти можеш змінити ліцей</p>
         </div>
-
-        <!-- Start Screen (shown after video or if skipped) -->
-        <div id="startScreen" class="card start-screen hidden fade-in">
-            <h2 style="color: var(--primary-color); margin-bottom: 15px;">Ласкаво просимо!</h2>
-            <p>Ця анкета допоможе тобі визначити, в якому міністерстві учнівського самоврядування ти міг би реалізувати свій потенціал.</p>
-            
-            <div class="features">
-                <div class="feature">
-                    <span class="feature-icon">🎯</span>
-                    <span>5 хвилин часу</span>
-                </div>
-                <div class="feature">
-                    <span class="feature-icon">🔒</span>
-                    <span>Повна анонімність</span>
-                </div>
-                <div class="feature">
-                    <span class="feature-icon">💡</span>
-                    <span>Персональна порада</span>
-                </div>
-                <div class="feature">
-                    <span class="feature-icon">🌟</span>
-                    <span>Розвиток навичок</span>
-                </div>
-            </div>
-
-            <div class="info-box">
-                <strong>ℹ️ Важливо:</strong>
-                Результат анкети є рекомендацією, а не обов'язковим призначенням. Ти маєш право обрати будь-яке міністерство за власним бажанням!
-            </div>
-
-            <button class="btn" onclick="startSurvey()">Почати тестування</button>
-
-            <div class="privacy-notice">
-                <h4> Захист персональних даних</h4>
-                <p>Анкета є повністю анонімною. Ми не збираємо персональні дані. Відповіді використовуються виключно для надання рекомендації. Обробка даних здійснюється відповідно до Закону України "Про захист персональних даних" №2297-VI та Загального регламенту із захисту даних (GDPR).</p>
-            </div>
-        </div>
-
-        <!-- Survey Container -->
-        <div id="surveyContainer" class="hidden">
-            <div class="progress-bar">
-                <div class="progress" id="progressBar" style="width: 0%"></div>
-            </div>
-
-            <div class="step-indicator" id="stepIndicator"></div>
-
-            <div id="questionContainer" class="card fade-in">
-                <div class="question" id="questionText"></div>
-                <div class="options" id="optionsContainer"></div>
-            </div>
-        </div>
-
-        <!-- Result Screen -->
-        <div id="resultScreen" class="card result hidden">
-            <div class="result-icon" id="resultIcon">🏆</div>
-            <h2 class="result-title">Твоя рекомендація</h2>
-            
-            <div class="ministry-card" id="ministryCard">
-                <div class="ministry-name" id="ministryName"></div>
-                <p class="ministry-description" id="ministryDescription"></p>
-                
-                <div class="ministry-tasks">
-                    <h3>Що ти робитимеш:</h3>
-                    <ul id="ministryTasks"></ul>
-                </div>
-            </div>
-
-            <div class="info-box">
-                <strong>💬 Пам'ятай:</strong>
-                Це лише порада на основі твоїх відповідей. Ти можеш обрати будь-яке інше міністерство, яке тебе цікавить. Головне – твоє бажання розвиватися та приносити користь школі!
-            </div>
-
-            <button class="btn" onclick="restartSurvey()">Пройти ще раз</button>
-            <button class="btn btn-secondary" onclick="showStartScreen()">На головну</button>
-
-            <div class="privacy-notice">
-                <h4>📞 Контактна інформація</h4>
-                <p>Якщо ти маєш запитання щодо учнівського самоврядування, звертайся до Президента школи або класного керівника. Ми чекаємо на тебе в команді!</p>
-            </div>
+        <div class="video-controls">
+            <button class="skip-btn" onclick="skipToStart()">Пропустити ▶</button>
         </div>
     </div>
 
-    <script>
-        // ===== VIDEO MANAGEMENT =====
-        const video = document.getElementById('introVideo');
-        const overlay = document.getElementById('videoOverlay');
-        const playButton = document.getElementById('playButton');
-        const skipBtn = document.getElementById('skipBtn');
-        const videoLoading = document.getElementById('videoLoading');
-        const videoError = document.getElementById('videoError');
-        const videoIntro = document.getElementById('videoIntro');
-        const startScreen = document.getElementById('startScreen');
+    <!-- START CARD -->
+    <div id="startCard" class="card">
+        <h2 style="margin-bottom:15px; color:var(--primary-color)">Готовий розпочати?</h2>
+        <p style="margin-bottom:20px">Ця анкета містить 15 життєвих ситуацій. Твої відповіді допоможуть визначити, до якого міністерства твої таланти підходять найбільше.</p>
+        <div style="background:#eef6ff; padding:15px; border-radius:12px; font-size:0.85rem; margin-bottom:20px">
+            <strong>ℹ️ Примітка:</strong> Результат є рекомендацією. Ти можеш обрати будь-яке міністерство, де хочеш розвиватися!
+        </div>
+        <button class="btn-action" onclick="startSurvey()">Почати опитування</button>
+    </div>
 
-        let videoStarted = false;
-        let videoEnded = false;
+    <!-- SURVEY CARD -->
+    <div id="surveyCard" class="card">
+        <div class="progress-container">
+            <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:5px">
+                <span id="progressText">Питання 1 з 15</span>
+                <span id="percentText">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+        </div>
+        <div id="questionText" class="question-text"></div>
+        <div id="optionsList" class="options-list"></div>
+    </div>
 
-        // Detect mobile for better UX
-        const isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
-                         || ('ontouchstart' in window);
+    <!-- RESULT CARD -->
+    <div id="resultCard" class="card result-card">
+        <h2 color="var(--primary-color)">Твій результат:</h2>
+        <div class="ministry-badge">
+            <div id="resIcon" class="ministry-icon"></div>
+            <div id="resName" class="ministry-title"></div>
+            <p id="resDesc" style="font-size:0.95rem; opacity:0.9"></p>
+        </div>
+        
+        <div class="tasks-list">
+            <h3>Твої майбутні завдання:</h3>
+            <ul id="resTasks"></ul>
+        </div>
 
-        // Show controls on tap for mobile
-        if (isMobile) {
-            videoIntro.addEventListener('click', () => {
-                videoIntro.classList.toggle('show-controls');
-            });
-        }
+        <button class="btn-action" onclick="location.reload()">Пройти ще раз</button>
+        <p style="margin-top:20px; font-size:0.8rem; color:#666">Звернись до Президента ліцею, щоб долучитися до команди!</p>
+    </div>
+</div>
 
-        // Handle video loading
-        video.addEventListener('loadeddata', () => {
-            videoLoading.classList.add('hidden');
-        });
-
-        video.addEventListener('canplay', () => {
-            videoLoading.classList.add('hidden');
-        });
-
-        // Handle video errors gracefully
-        video.addEventListener('error', () => {
-            videoLoading.classList.add('hidden');
-            videoError.classList.remove('hidden');
-            overlay.classList.add('hidden');
-            console.warn('Відео не вдалося завантажити, показуємо fallback');
-        });
-
-        // Timeout fallback — if video doesn't load in 8 seconds
-        const videoTimeout = setTimeout(() => {
-            if (!videoStarted && video.readyState < 2) {
-                videoLoading.classList.add('hidden');
-                videoError.classList.remove('hidden');
-                overlay.classList.add('hidden');
+<script>
+    // --- ДАНІ АНКЕТИ (15 ситуаційних кейсів) ---
+    const surveyData = {
+        questions: [
+            {
+                q: "У коридорі гамір, і хтось випадково розсипав стопку важливих паперів. Твоя реакція?",
+                options: [
+                    { t: "Швидко допомагаю зібрати та розкласти все за порядком", i: "🛡️", s: { discipline: 3 } },
+                    { t: "Роблю фото, щоб повідомити в чаті про знахідку", i: "📱", s: { info: 2 } },
+                    { t: "Питаю, чи це не матеріали для олімпіади", i: "📚", s: { education: 1 } }
+                ]
+            },
+            {
+                q: "Клас має 15 хвилин, щоб представити себе на лінійці. Що запропонуєш?",
+                options: [
+                    { t: "Вигадати цікавий девіз або творчу сценку", i: "🎭", s: { culture: 3 } },
+                    { t: "Скласти чіткий звіт про досягнення класу", i: "📊", s: { education: 2 } },
+                    { t: "Зробити яскравий плакат-представлення", i: "🎨", s: { culture: 2, info: 1 } }
+                ]
+            },
+            {
+                q: "У класному чаті суперечка щодо правил поведінки на екскурсії. Що зробиш?",
+                options: [
+                    { t: "Нагадаю правила безпеки та закличу до порядку", i: "⚖️", s: { discipline: 3 } },
+                    { t: "Запропоную провести голосування, щоб знайти компроміс", i: "📩", s: { info: 2 } },
+                    { t: "Проігнорую суперечку, але підготую цікаві факти про місце поїздки", i: "📖", s: { education: 2 } }
+                ]
+            },
+            {
+                q: "Однокласник взагалі не розуміє складну тему з уроку. Твої дії?",
+                options: [
+                    { t: "З радістю поясню матеріал простими словами", i: "🧠", s: { education: 3 } },
+                    { t: "Пораджу корисні відеоуроки або статті", i: "💻", s: { info: 2 } },
+                    { t: "Запропоную організувати групу взаємодопомоги", i: "👥", s: { education: 2 } }
+                ]
+            },
+            {
+                q: "На фізкультурі залишилося 10 хвилин вільного часу. Чим займешся?",
+                options: [
+                    { t: "Організую швидку командну гру чи естафету", i: "⚽", s: { sport: 3 } },
+                    { t: "Буду вболівати та знімати гру на відео для сторінки класу", i: "📸", s: { info: 2 } },
+                    { t: "Повторю правила гри, щоб не було порушень", i: "🛡️", s: { discipline: 2 } }
+                ]
+            },
+            {
+                q: "У школі відбулася крута акція, але про неї майже ніхто не знає. Твої дії?",
+                options: [
+                    { t: "Зніму сторіз або напишу пост у соцмережі", i: "📱", s: { info: 3 } },
+                    { t: "Розповім усім знайомим особисто", i: "🗣️", s: { info: 2, culture: 1 } },
+                    { t: "Запропоную зробити цю акцію регулярною та внести в план", i: "📅", s: { discipline: 2 } }
+                ]
+            },
+            {
+                q: "Шкільний куточок до свята порожній, а залишився лише день. Що зробиш?",
+                options: [
+                    { t: "Швидко створю декор або намалюю плакат", i: "🎨", s: { culture: 3 } },
+                    { t: "Організую чергування, щоб встигнути все прибрати й прикрасити", i: "🛡️", s: { discipline: 2 } },
+                    { t: "Напишу оголошення, щоб залучити помічників", i: "📢", s: { info: 2 } }
+                ]
+            },
+            {
+                q: "Усі розгублені, бо не знають, у якому кабінеті наступний урок. Твій вихід?",
+                options: [
+                    { t: "Піду до вчителя, дізнаюся точно і оголошу всім", i: "🔍", s: { info: 3 } },
+                    { t: "Перевірю офіційний розклад на стенді чи сайті", i: "📋", s: { discipline: 2 } },
+                    { t: "Поки чекаємо, запропоную обговорити домашнє завдання", i: "📚", s: { education: 2 } }
+                ]
+            },
+            {
+                q: "У їдальні створюється хаос і штовханина. Як зреагуєш?",
+                options: [
+                    { t: "Організую учнів у рівну чергу та стежитиму за порядком", i: "🛡️", s: { discipline: 3 } },
+                    { t: "Зроблю зауваження тим, хто порушує правила", i: "🚫", s: { discipline: 2 } },
+                    { t: "Запропоную розробити графік відвідування для класів", i: "📝", s: { education: 1, discipline: 2 } }
+                ]
+            },
+            {
+                q: "Учитель затримується, і клас не знає, чим зайнятися. Твоя пропозиція?",
+                options: [
+                    { t: "Пропоную зіграти в інтелектуальну вікторину", i: "🧩", s: { education: 3 } },
+                    { t: "Покажу всім цікаве відео по темі уроку", i: "🎥", s: { info: 2 } },
+                    { t: "Стежитиму, щоб у класі було тихо до приходу вчителя", i: "🤫", s: { discipline: 2 } }
+                ]
+            },
+            {
+                q: "Школі потрібно зібрати команду на змагання. Що зробиш?",
+                options: [
+                    { t: "Першим запишуся і буду тренуватися щодня", i: "🏃", s: { sport: 3 } },
+                    { t: "Зроблю круту афішу-заклик для набору команди", i: "📣", s: { info: 2 } },
+                    { t: "Допоможу з підготовкою форми та інвентарю", i: "🎒", s: { discipline: 2 } }
+                ]
+            },
+            {
+                q: "До вас у клас прийшов новий учень і він дуже соромиться. Як допоможеш?",
+                options: [
+                    { t: "Познайомлю з усіма та запрошу до нашої компанії", i: "🤝", s: { info: 2, culture: 2 } },
+                    { t: "Покажу, де знаходяться кабінети, бібліотека та спортзал", i: "🏫", s: { info: 2 } },
+                    { t: "Допоможу розібратися з новими шкільними правилами", i: "🛡️", s: { discipline: 2 } }
+                ]
+            },
+            {
+                q: "Оголошено день без шкільної форми у певному стилі. Твій підхід?",
+                options: [
+                    { t: "Придумаю найяскравіший образ і допоможу друзям", i: "🎭", s: { culture: 3 } },
+                    { t: "Зроблю фоторепортаж про найстильніших учнів ліцею", i: "📸", s: { info: 3 } },
+                    { t: "Стежитиму, щоб креатив не заважав навчальному процесу", i: "📏", s: { discipline: 2 } }
+                ]
+            },
+            {
+                q: "Школа вирішила проводити руханку перед уроками. Твоя роль?",
+                options: [
+                    { t: "Буду показувати вправи під музику перед учнями", i: "💪", s: { sport: 3 } },
+                    { t: "Підберу драйвовий плейлист для занять", i: "🎵", s: { culture: 2 } },
+                    { t: "Напишу статтю про користь ранкової зарядки", i: "📰", s: { info: 2 } }
+                ]
+            },
+            {
+                q: "Потрібно зібрати кошти на допомогу притулку тварин. Як допоможеш?",
+                options: [
+                    { t: "Організую ярмарок випічки чи виробів ручної роботи", i: "🧁", s: { culture: 3 } },
+                    { t: "Розроблю систему обліку зібраних коштів та звітність", i: "📊", s: { discipline: 2, education: 1 } },
+                    { t: "Зроблю зворушливе відео про тварин для збору", i: "🐾", s: { info: 3 } }
+                ]
             }
-        }, 8000);
-
-        // Play button handler
-        playButton.addEventListener('click', async () => {
-            clearTimeout(videoTimeout);
-            try {
-                // Unmute on user interaction (required by browsers)
-                video.muted = false;
-                video.volume = 0.7;
-                await video.play();
-                overlay.classList.add('hidden');
-                videoStarted = true;
-                videoIntro.classList.add('show-controls');
-                
-                // Show caption for accessibility
-                setTimeout(() => {
-                    videoIntro.classList.add('show-caption');
-                    setTimeout(() => {
-                        videoIntro.classList.remove('show-caption');
-                    }, 5000);
-                }, 1000);
-            } catch (err) {
-                console.warn('Autoplay blocked:', err);
-                // Fallback: show video muted
-                video.muted = true;
-                try {
-                    await video.play();
-                    overlay.classList.add('hidden');
-                    videoStarted = true;
-                } catch (e) {
-                    videoError.classList.remove('hidden');
-                    overlay.classList.add('hidden');
-                }
-            }
-        });
-
-        // Skip button
-        skipBtn.addEventListener('click', skipVideo);
-
-        function skipVideo() {
-            clearTimeout(videoTimeout);
-            video.pause();
-            videoIntro.classList.add('hidden');
-            startScreen.classList.remove('hidden');
-        }
-
-        // When video ends, show start screen
-        video.addEventListener('ended', () => {
-            videoEnded = true;
-            setTimeout(() => {
-                videoIntro.classList.add('hidden');
-                startScreen.classList.remove('hidden');
-            }, 500);
-        });
-
-        // Auto-try muted autoplay (works on most mobile browsers)
-        window.addEventListener('load', () => {
-            if (video.readyState >= 2) {
-                videoLoading.classList.add('hidden');
-            }
-            // Try muted autoplay
-            video.muted = true;
-            video.play().then(() => {
-                clearTimeout(videoTimeout);
-                overlay.classList.add('hidden');
-                videoStarted = true;
-                videoIntro.classList.add('show-controls');
-            }).catch(() => {
-                // Autoplay blocked — keep overlay visible
-                console.log('Autoplay blocked, waiting for user interaction');
-            });
-        });
-
-        // Pause video when tab is hidden (save battery)
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden && !video.paused) {
-                video.pause();
-            } else if (!document.hidden && videoStarted && !videoEnded) {
-                video.play().catch(() => {});
-            }
-        });
-
-        // ===== SURVEY DATA (based on Положення про кабінет міністрів) =====
-        const surveyData = {
-            questions: [
-                {
-                    id: 1,
-                    text: "Що тобі найбільше подобається робити у вільний час?",
-                    type: "single",
-                    options: [
-                        { text: "Читати книги, вивчати нове, розв'язувати задачі", icon: "📚", next: 2, score: { education: 3 } },
-                        { text: "Займатися спортом, бути активним", icon: "⚽", next: 2, score: { sport: 3 } },
-                        { text: "Малювати, співати, танцювати, творити", icon: "🎨", next: 2, score: { culture: 3 } },
-                        { text: "Допомагати іншим, наводити порядок", icon: "🛡️", next: 2, score: { discipline: 3 } },
-                        { text: "Спілкуватися, ділитися новинами", icon: "", next: 2, score: { info: 3 } }
-                    ]
-                },
-                {
-                    id: 2,
-                    text: "Яка діяльність у школі тобі найбільш цікава?",
-                    type: "single",
-                    options: [
-                        { text: "Олімпіади, конкурси, наукові проєкти", icon: "🏅", next: 3, score: { education: 2 } },
-                        { text: "Спортивні змагання, турніри", icon: "🏆", next: 3, score: { sport: 2 } },
-                        { text: "Концерти, свята, вистави", icon: "🎭", next: 3, score: { culture: 2 } },
-                        { text: "Чергування, допомога в організації порядку", icon: "📋", next: 3, score: { discipline: 2 } },
-                        { text: "Створення шкільних новин, фото/відео", icon: "📸", next: 3, score: { info: 2 } }
-                    ]
-                },
-                {
-                    id: 3,
-                    text: "Які якості ти цінуєш у собі найбільше?",
-                    type: "single",
-                    options: [
-                        { text: "Розум, допитливість, аналітичне мислення", icon: "🧠", next: 4, score: { education: 2 } },
-                        { text: "Витривалість, сила, спритність", icon: "💪", next: 4, score: { sport: 2 } },
-                        { text: "Креативність, уява, артистизм", icon: "✨", next: 4, score: { culture: 2 } },
-                        { text: "Відповідальність, організованість", icon: "✅", next: 4, score: { discipline: 2 } },
-                        { text: "Комунікабельність, відкритість", icon: "💬", next: 4, score: { info: 2 } }
-                    ]
-                },
-                {
-                    id: 4,
-                    text: "Що для тебе найважливіше у шкільному житті?",
-                    type: "single",
-                    options: [
-                        { text: "Отримувати глибокі знання та розвиватися", icon: "🎓", next: 5, score: { education: 2 } },
-                        { text: "Бути здоровим та фізично розвиненим", icon: "❤️", next: 5, score: { sport: 2 } },
-                        { text: "Творча самореалізація та яскраві події", icon: "🎉", next: 5, score: { culture: 2 } },
-                        { text: "Дисципліна, порядок, справедливість", icon: "⚖️", next: 5, score: { discipline: 2 } },
-                        { text: "Інформаційна відкритість та прозорість", icon: "📢", next: 5, score: { info: 2 } }
-                    ]
-                },
-                {
-                    id: 5,
-                    text: "Як ти уявляєш свій внесок у розвиток школи?",
-                    type: "single",
-                    options: [
-                        { text: "Допомагати учням краще навчатися", icon: "", next: "result", score: { education: 2 } },
-                        { text: "Організовувати спортивні заходи", icon: "⚽", next: "result", score: { sport: 2 } },
-                        { text: "Створювати святкову атмосферу", icon: "🎨", next: "result", score: { culture: 2 } },
-                        { text: "Підтримувати порядок та дисципліну", icon: "🛡️", next: "result", score: { discipline: 2 } },
-                        { text: "Інформувати про шкільне життя", icon: "📰", next: "result", score: { info: 2 } }
-                    ]
-                }
-            ],
-            ministries: {
-                education: {
-                    name: "Міністерство освіти та науки",
-                    icon: "🎓",
-                    description: "Ти маєш аналітичний склад розуму та прагнення до знань! Це міністерство ідеально підходить для тебе.",
-                    tasks: [
-                        "Контролювати відвідування уроків та успішність",
-                        "Організовувати конкурси ерудитів та інтелектуальні ігри",
-                        "Допомагати учням, які мають труднощі з навчанням",
-                        "Проводити предметні тижні та тематичні вечори",
-                        "Розвивати культуру читання серед учнів",
-                        "Створювати нові гуртки за інтересами"
-                    ]
-                },
-                discipline: {
-                    name: "Міністерство дисципліни та порядку",
-                    icon: "🛡️",
-                    description: "Ти відповідальний та організований! Твої лідерські якості допоможуть підтримувати порядок у школі.",
-                    tasks: [
-                        "Допомагати у вихованні свідомої дисципліни",
-                        "Контролювати дотримання правил поведінки",
-                        "Організовувати чергування класів по школі",
-                        "Виховувати бережливе ставлення до шкільного майна",
-                        "Боротися з вандалізмом та ненормативною лексикою",
-                        "Забезпечувати безпеку під час навчальних тривог"
-                    ]
-                },
-                culture: {
-                    name: "Міністерство культури та дозвілля",
-                    icon: "🎭",
-                    description: "Ти творча особистість з яскравою уявою! Твої таланти допоможуть зробити шкільне життя різноманітним.",
-                    tasks: [
-                        "Організовувати культурно-масові заходи та свята",
-                        "Проводити шкільні вечори та концерти",
-                        "Допомагати талановитим учням розвиватися",
-                        "Організовувати екскурсії та кінолекторії",
-                        "Створювати гуртки художньої самодіяльності",
-                        "Робити дозвілля учнів змістовним та цікавим"
-                    ]
-                },
-                sport: {
-                    name: "Міністерство спорту і охорони здоров'я",
-                    icon: "⚽",
-                    description: "Ти активний та енергійний! Пропаганда здорового способу життя – твоє покликання.",
-                    tasks: [
-                        "Організовувати спортивні турніри та акції",
-                        "Проводити туристичні походи",
-                        "Пропагувати здоровий спосіб життя",
-                        "Організовувати дискусії про шкідливість шкідливих звичок",
-                        "Залучати учнів до спортивних секцій",
-                        "Проводити профілактику дитячого травматизму"
-                    ]
-                },
-                info: {
-                    name: "Міністерство інформації",
-                    icon: "📱",
-                    description: "Ти комунікабельний та відкритий! Твої навички допоможуть школі бути інформаційно відкритою.",
-                    tasks: [
-                        "Забезпечувати гласність діяльності самоврядування",
-                        "Інформувати шкільну громаду про всі заходи",
-                        "Розвивати шкільні засоби інформації",
-                        "Організовувати опитування думок учнів",
-                        "Підвищувати інтерес дітей до життя школи",
-                        "Збирати та обговорювати актуальні теми"
-                    ]
-                }
-            }
-        };
-
-        // ===== SURVEY STATE =====
-        let currentQuestion = 0;
-        let scores = { education: 0, discipline: 0, culture: 0, sport: 0, info: 0 };
-        let userAnswers = [];
-
-        function init() {
-            createStepIndicator();
-        }
-
-        function createStepIndicator() {
-            const indicator = document.getElementById('stepIndicator');
-            indicator.innerHTML = '';
-            for (let i = 0; i < surveyData.questions.length; i++) {
-                const step = document.createElement('div');
-                step.className = 'step';
-                step.id = `step-${i}`;
-                indicator.appendChild(step);
+        ],
+        ministries: {
+            education: {
+                name: "Міністерство освіти та науки",
+                icon: "🎓",
+                desc: "Ти — інтелектуальний двигун ліцею! Твоя допитливість та вміння пояснювати складне допоможуть іншим навчатися краще.",
+                tasks: [
+                    "Організація інтелектуальних турнірів та вікторин",
+                    "Допомога учням, які мають труднощі в навчанні",
+                    "Проведення предметних тижнів та наукових пікніків",
+                    "Контроль за відвідуванням та аналіз успішності"
+                ]
+            },
+            discipline: {
+                name: "Міністерство дисципліни та порядку",
+                icon: "🛡️",
+                desc: "Ти — охоронець гармонії та справедливості! Твоя організованість забезпечує комфорт та безпеку для кожного учня.",
+                tasks: [
+                    "Організація та контроль чергування класів",
+                    "Виховання дбайливого ставлення до майна ліцею",
+                    "Контроль за дотриманням правил поведінки та етики",
+                    "Допомога у забезпеченні порядку під час тривог"
+                ]
+            },
+            culture: {
+                name: "Міністерство культури та дозвілля",
+                icon: "🎭",
+                desc: "Ти — серце творчості ліцею! Твоя креативність робить шкільне життя яскравим та незабутнім.",
+                tasks: [
+                    "Організація концертів, свят та тематичних вечорів",
+                    "Пошук та підтримка талановитої молоді ліцею",
+                    "Оформлення фотозон та виставкових майданчиків",
+                    "Проведення квестів, майстер-класів та дискотек"
+                ]
+            },
+            sport: {
+                name: "Міністерство спорту і охорони здоров'я",
+                icon: "⚽",
+                desc: "Ти — символ енергії та здоров'я! Твій приклад надихає ліцеїстів на активний та здоровий спосіб життя.",
+                tasks: [
+                    "Організація спортивних змагань, кубків та турнірів",
+                    "Пропаганда здорового способу життя та спорту",
+                    "Проведення ранкових руханок та спортивних флешмобів",
+                    "Організація туристичних походів та естафет"
+                ]
+            },
+            info: {
+                name: "Міністерство інформації",
+                icon: "📱",
+                desc: "Ти — медійне обличчя ліцею! Твоє вміння працювати з інформацією робить життя ліцею прозорим та цікавим для всіх.",
+                tasks: [
+                    "Висвітлення подій у соцмережах та на сайті ліцею",
+                    "Створення фото- та відеозвітів про шкільні заходи",
+                    "Проведення опитувань думок учнів (інтерв'ю)",
+                    "Випуск шкільних новин та ведення інформаційних стендів"
+                ]
             }
         }
+    };
 
-        function updateStepIndicator() {
-            for (let i = 0; i < surveyData.questions.length; i++) {
-                const step = document.getElementById(`step-${i}`);
-                if (i < currentQuestion) step.className = 'step completed';
-                else if (i === currentQuestion) step.className = 'step active';
-                else step.className = 'step';
-            }
+    // --- ЛОГІКА ДОДАТКА ---
+    let currentStep = 0;
+    let scores = { education: 0, discipline: 0, culture: 0, sport: 0, info: 0 };
+    const video = document.getElementById('introVideo');
+
+    function startVideo() {
+        document.getElementById('videoOverlay').classList.add('hidden');
+        video.play();
+    }
+
+    video.onended = function() {
+        skipToStart();
+    };
+
+    function skipToStart() {
+        video.pause();
+        document.getElementById('videoSection').classList.add('hidden');
+        document.getElementById('startCard').classList.add('active');
+    }
+
+    function startSurvey() {
+        document.getElementById('startCard').classList.remove('active');
+        document.getElementById('surveyCard').classList.add('active');
+        showQuestion();
+    }
+
+    function showQuestion() {
+        const question = surveyData.questions[currentStep];
+        const total = surveyData.questions.length;
+        
+        // Progress
+        document.getElementById('progressText').innerText = `Питання ${currentStep + 1} з ${total}`;
+        const percent = Math.round((currentStep / total) * 100);
+        document.getElementById('percentText').innerText = `${percent}%`;
+        document.getElementById('progressFill').style.width = `${percent}%`;
+
+        // Text
+        document.getElementById('questionText').innerText = question.q;
+        
+        // Options
+        const optionsList = document.getElementById('optionsList');
+        optionsList.innerHTML = '';
+        
+        question.options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerHTML = `<span class="option-icon">${opt.i}</span> <span>${opt.t}</span>`;
+            btn.onclick = () => selectOption(opt.s);
+            optionsList.appendChild(btn);
+        });
+    }
+
+    function selectOption(points) {
+        for (let m in points) {
+            scores[m] += points[m];
         }
 
-        function updateProgressBar() {
-            const progress = ((currentQuestion) / surveyData.questions.length) * 100;
-            document.getElementById('progressBar').style.width = `${progress}%`;
-        }
-
-        function startSurvey() {
-            document.getElementById('startScreen').classList.add('hidden');
-            document.getElementById('surveyContainer').classList.remove('hidden');
-            currentQuestion = 0;
-            scores = { education: 0, discipline: 0, culture: 0, sport: 0, info: 0 };
-            userAnswers = [];
+        currentStep++;
+        if (currentStep < surveyData.questions.length) {
             showQuestion();
+        } else {
+            showResult();
         }
+    }
 
-        function showQuestion() {
-            const question = surveyData.questions[currentQuestion];
-            const container = document.getElementById('questionContainer');
-            
-            container.classList.remove('fade-in');
-            void container.offsetWidth;
-            
-            document.getElementById('questionText').textContent = `${currentQuestion + 1}. ${question.text}`;
-            
-            const optionsContainer = document.getElementById('optionsContainer');
-            optionsContainer.innerHTML = '';
-            
-            question.options.forEach((option) => {
-                const btn = document.createElement('button');
-                btn.className = 'option';
-                btn.innerHTML = `<span class="option-icon">${option.icon}</span><span>${option.text}</span>`;
-                btn.onclick = () => selectOption(option);
-                btn.setAttribute('aria-label', option.text);
-                optionsContainer.appendChild(btn);
-            });
-            
-            container.classList.add('fade-in');
-            updateStepIndicator();
-            updateProgressBar();
-        }
+    function showResult() {
+        document.getElementById('surveyCard').classList.remove('active');
+        document.getElementById('resultCard').classList.add('active');
 
-        function selectOption(option) {
-            for (let key in option.score) {
-                scores[key] += option.score[key];
-            }
-            userAnswers.push(option);
-            
-            if (option.next === 'result') {
-                showResult();
-            } else {
-                currentQuestion++;
-                setTimeout(() => showQuestion(), 300);
+        // Логіка визначення переможця з урахуванням Tie-breaker
+        let maxScore = -1;
+        let winners = [];
+
+        for (let m in scores) {
+            if (scores[m] > maxScore) {
+                maxScore = scores[m];
+                winners = [m];
+            } else if (scores[m] === maxScore) {
+                winners.push(m);
             }
         }
 
-        function showResult() {
-            document.getElementById('surveyContainer').classList.add('hidden');
-            document.getElementById('resultScreen').classList.remove('hidden');
-            document.getElementById('resultScreen').classList.add('fade-in');
-            
-            let maxScore = 0;
-            let bestMinistry = 'education';
-            
-            for (let key in scores) {
-                if (scores[key] > maxScore) {
-                    maxScore = scores[key];
-                    bestMinistry = key;
-                }
-            }
-            
-            const ministry = surveyData.ministries[bestMinistry];
-            
-            document.getElementById('resultIcon').textContent = ministry.icon;
-            document.getElementById('ministryName').textContent = ministry.name;
-            document.getElementById('ministryDescription').textContent = ministry.description;
-            
-            const tasksList = document.getElementById('ministryTasks');
-            tasksList.innerHTML = '';
-            ministry.tasks.forEach(task => {
-                const li = document.createElement('li');
-                li.textContent = task;
-                tasksList.appendChild(li);
-            });
-            
-            document.getElementById('progressBar').style.width = '100%';
-            updateStepIndicator();
-        }
+        // Рандомний вибір, якщо є кілька лідерів
+        const resultKey = winners[Math.floor(Math.random() * winners.length)];
+        const ministry = surveyData.ministries[resultKey];
 
-        function restartSurvey() {
-            document.getElementById('resultScreen').classList.add('hidden');
-            document.getElementById('resultScreen').classList.remove('fade-in');
-            startSurvey();
-        }
+        // Відображення
+        document.getElementById('resIcon').innerText = ministry.icon;
+        document.getElementById('resName').innerText = ministry.name;
+        document.getElementById('resDesc').innerText = ministry.desc;
 
-        function showStartScreen() {
-            document.getElementById('resultScreen').classList.add('hidden');
-            document.getElementById('startScreen').classList.remove('hidden');
-            document.getElementById('startScreen').classList.add('fade-in');
-            currentQuestion = 0;
-            document.getElementById('progressBar').style.width = '0%';
-        }
+        const resTasks = document.getElementById('resTasks');
+        resTasks.innerHTML = '';
+        ministry.tasks.forEach(t => {
+            const li = document.createElement('li');
+            li.innerText = t;
+            resTasks.appendChild(li);
+        });
 
-        window.onload = init;
-    </script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+
 </body>
 </html>
